@@ -2,34 +2,120 @@ import {
   BarChart2,
   Building,
   Building2,
+  Bus,
   Calendar,
   Camera,
   CheckCircle2,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
+  CreditCard,
   Dumbbell,
   FileBadge,
   FileText,
   Globe,
   GraduationCap,
+  Headphones,
   Home,
   MessageCircle,
   MessageSquare,
+  Plane,
   PlaneLanding,
   Play,
   School,
+  ShieldCheck,
   Star,
+  Ticket,
   Video,
 } from 'lucide-react';
 import { useState } from 'react';
 import { translations } from './translations';
+
+const countries = [
+  // Americas
+  { code: "+1", flag: "🇺🇸", name: "US/Canada" },
+  { code: "+52", flag: "🇲🇽", name: "Mexico" },
+  { code: "+55", flag: "🇧🇷", name: "Brazil" },
+  { code: "+54", flag: "🇦🇷", name: "Argentina" },
+  { code: "+57", flag: "🇨🇴", name: "Colombia" },
+  { code: "+56", flag: "🇨🇱", name: "Chile" },
+  { code: "+51", flag: "🇵🇪", name: "Peru" },
+  { code: "+58", flag: "🇻🇪", name: "Venezuela" },
+  { code: "+593", flag: "🇪🇨", name: "Ecuador" },
+  { code: "+502", flag: "🇬🇹", name: "Guatemala" },
+  { code: "+53", flag: "🇨🇺", name: "Cuba" },
+  { code: "+591", flag: "🇧🇴", name: "Bolivia" },
+  { code: "+504", flag: "🇭🇳", name: "Honduras" },
+  { code: "+595", flag: "🇵🇾", name: "Paraguay" },
+  { code: "+503", flag: "🇸🇻", name: "El Salvador" },
+  { code: "+505", flag: "🇳🇮", name: "Nicaragua" },
+  { code: "+506", flag: "🇨🇷", name: "Costa Rica" },
+  { code: "+507", flag: "🇵🇦", name: "Panama" },
+  { code: "+598", flag: "🇺🇾", name: "Uruguay" },
+  // Europe
+  { code: "+44", flag: "🇬🇧", name: "UK" },
+  { code: "+34", flag: "🇪🇸", name: "Spain" },
+  { code: "+33", flag: "🇫🇷", name: "France" },
+  { code: "+49", flag: "🇩🇪", name: "Germany" },
+  { code: "+39", flag: "🇮🇹", name: "Italy" },
+  { code: "+351", flag: "🇵🇹", name: "Portugal" },
+  { code: "+7", flag: "🇷🇺", name: "Russia" },
+  { code: "+380", flag: "🇺🇦", name: "Ukraine" },
+  { code: "+48", flag: "🇵🇱", name: "Poland" },
+  { code: "+40", flag: "🇷🇴", name: "Romania" },
+  { code: "+31", flag: "🇳🇱", name: "Netherlands" },
+  { code: "+32", flag: "🇧🇪", name: "Belgium" },
+  { code: "+30", flag: "🇬🇷", name: "Greece" },
+  { code: "+420", flag: "🇨🇿", name: "Czechia" },
+  { code: "+46", flag: "🇸🇪", name: "Sweden" },
+  { code: "+36", flag: "🇭🇺", name: "Hungary" },
+  { code: "+43", flag: "🇦🇹", name: "Austria" },
+  { code: "+41", flag: "🇨🇭", name: "Switzerland" },
+  { code: "+45", flag: "🇩🇰", name: "Denmark" },
+  { code: "+358", flag: "🇫🇮", name: "Finland" },
+  { code: "+47", flag: "🇳🇴", name: "Norway" },
+  { code: "+353", flag: "🇮🇪", name: "Ireland" },
+  // Asia
+  { code: "+86", flag: "🇨🇳", name: "China" },
+  { code: "+91", flag: "🇮🇳", name: "India" },
+  { code: "+81", flag: "🇯🇵", name: "Japan" },
+  { code: "+82", flag: "🇰🇷", name: "South Korea" },
+  { code: "+62", flag: "🇮🇩", name: "Indonesia" },
+  { code: "+92", flag: "🇵🇰", name: "Pakistan" },
+  { code: "+880", flag: "🇧🇩", name: "Bangladesh" },
+  { code: "+90", flag: "🇹🇷", name: "Turkey" },
+  { code: "+98", flag: "🇮🇷", name: "Iran" },
+  { code: "+66", flag: "🇹🇭", name: "Thailand" },
+  { code: "+95", flag: "🇲🇲", name: "Myanmar" },
+  { code: "+84", flag: "🇻🇳", name: "Vietnam" },
+  { code: "+63", flag: "🇵🇭", name: "Philippines" },
+  { code: "+60", flag: "🇲🇾", name: "Malaysia" },
+  { code: "+977", flag: "🇳🇵", name: "Nepal" },
+  { code: "+93", flag: "🇦🇫", name: "Afghanistan" },
+  { code: "+964", flag: "🇮🇶", name: "Iraq" },
+  { code: "+966", flag: "🇸🇦", name: "Saudi Arabia" },
+  { code: "+998", flag: "🇺🇿", name: "Uzbekistan" },
+  { code: "+65", flag: "🇸🇬", name: "Singapore" },
+  { code: "+971", flag: "🇦🇪", name: "UAE" },
+  { code: "+972", flag: "🇮🇱", name: "Israel" },
+  // Oceania
+  { code: "+61", flag: "🇦🇺", name: "Australia" },
+  { code: "+64", flag: "🇳🇿", name: "New Zealand" },
+  { code: "+679", flag: "🇫🇯", name: "Fiji" },
+  { code: "+675", flag: "🇵🇬", name: "Papua New Guinea" },
+  { code: "+677", flag: "🇸🇧", name: "Solomon Islands" },
+  { code: "+678", flag: "🇻🇺", name: "Vanuatu" },
+  { code: "+685", flag: "🇼🇸", name: "Samoa" },
+  { code: "+676", flag: "🇹🇴", name: "Tonga" }
+];
 
 export default function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [currentLang, setCurrentLang] = useState<'EN' | 'ES' | 'PT' | 'TR'>('EN');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [activeHeroIcon, setActiveHeroIcon] = useState<number | null>(null);
+  const [hoveredReview, setHoveredReview] = useState<string | null>(null);
 
   const t = translations[currentLang];
 
@@ -40,6 +126,10 @@ export default function App() {
   ];
 
   const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+
+  const scrollToSteps = () => {
+    document.getElementById('process')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const scrollToForm = () => {
     document.getElementById('form-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -122,6 +212,7 @@ export default function App() {
         </div>
       </nav>
 
+      
       {/* Hero Section */}
       <header
         className="relative pt-32 pb-20 overflow-hidden bg-primary min-h-[870px] flex items-center"
@@ -136,138 +227,379 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/20 to-background"></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
-          <div className="max-w-5xl">
-            <span className="inline-block px-4 py-1.5 mb-6 rounded-full bg-secondary text-primary font-bold text-xs uppercase tracking-widest shadow-sm">
-              {t.hero.partner}
-            </span>
-            <h1 className="text-white font-black text-5xl md:text-7xl leading-[1.1] tracking-tight mb-6">
-              {t.hero.title1} <br />
-              <span className="text-secondary">{t.hero.title2}</span> {t.hero.title3}
-            </h1>
-            <p className="text-white/90 text-xl md:text-2xl font-medium max-w-2xl mb-12">
-              {t.hero.subtitle}
-            </p>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-xl">
+              <span className="inline-block px-4 py-1.5 mb-6 rounded-full bg-secondary text-primary font-bold text-xs uppercase tracking-widest shadow-sm">
+                {t.hero.partner}
+              </span>
+              <h1 className="text-white font-black text-5xl md:text-6xl leading-[1.1] tracking-tight mb-6">
+                {t.hero.title1} <br />
+                <span className="text-secondary">{t.hero.title2}</span> {t.hero.title3}
+              </h1>
+              <p className="text-white/90 text-xl font-medium mb-8">
+                {t.hero.subtitle}
+              </p>
 
-            {/* Bubble Process Icons */}
-            <div className="flex flex-wrap gap-4">
-              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-full border border-white/20 shadow-lg">
-                <div className="bg-secondary p-1.5 rounded-full text-primary flex items-center justify-center">
-                  <FileBadge className="w-4 h-4" />
-                </div>
-                <span className="text-white font-bold text-sm">
-                  {t.hero.visa}
-                </span>
+              <button 
+                onClick={scrollToSteps}
+                className="bg-secondary text-primary px-8 py-4 rounded-2xl font-black text-lg hover:opacity-90 transition-all duration-300 active:scale-95 shadow-lg shadow-secondary/20 mb-12"
+              >
+                {t.hero.getStarted}
+              </button>
+
+              {/* Interactive Icons */}
+              <div className="flex flex-wrap gap-4">
+                {[
+                  { icon: <GraduationCap className="w-5 h-5" />, label: t.hero.iconAcademic },
+                  { icon: <Home className="w-5 h-5" />, label: t.hero.iconHousing },
+                  { icon: <FileBadge className="w-5 h-5" />, label: t.hero.iconVisa },
+                  { icon: <PlaneLanding className="w-5 h-5" />, label: t.hero.iconArrival },
+                  { icon: <Globe className="w-5 h-5" />, label: t.hero.iconCommunity }
+                ].map((item, idx) => (
+                  <div 
+                    key={idx} 
+                    className="relative cursor-pointer"
+                    onClick={() => setActiveHeroIcon(activeHeroIcon === idx ? null : idx)}
+                  >
+                    <div className={`bg-white/15 backdrop-blur-md p-3 rounded-full border border-white/20 shadow-lg transition-all ${activeHeroIcon === idx ? 'bg-secondary text-primary' : 'text-white hover:bg-white/25'}`}>
+                      {item.icon}
+                    </div>
+                    {activeHeroIcon === idx && (
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-48 bg-white text-slate-800 text-sm font-medium p-3 rounded-xl shadow-xl z-20">
+                        {item.label}
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-white"></div>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-full border border-white/20 shadow-lg">
-                <div className="bg-secondary p-1.5 rounded-full text-primary flex items-center justify-center">
-                  <CheckCircle2 className="w-4 h-4" />
+            </div>
+
+            {/* Form Bubble */}
+            <div className="bg-white p-8 rounded-[2.5rem] shadow-2xl relative z-20 hidden lg:block" id="form-section">
+              <h3 className="text-3xl font-black text-primary mb-2 text-center">{t.form.title1} {t.form.title2}</h3>
+              <p className="text-slate-500 text-sm mb-6 text-center">{t.form.desc}</p>
+              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-bold text-primary mb-1">{t.form.fName}</label>
+                    <input className="w-full bg-white border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-sm" placeholder={t.form.fNamePlaceholder} type="text" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-primary mb-1">{t.form.fEmail}</label>
+                    <input className="w-full bg-white border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-sm" placeholder={t.form.fEmailPlaceholder} type="email" />
+                  </div>
                 </div>
-                <span className="text-white font-bold text-sm">
-                  {t.hero.application}
-                </span>
-              </div>
-              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-full border border-white/20 shadow-lg">
-                <div className="bg-secondary p-1.5 rounded-full text-primary flex items-center justify-center">
-                  <PlaneLanding className="w-4 h-4" />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-bold text-primary mb-1">{t.form.fPhone}</label>
+                    <div className="flex">
+                      <select className="bg-white border border-slate-200 border-r-0 rounded-l-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-slate-700 text-sm max-w-[100px]">
+                        {countries.map((country, idx) => (
+                          <option key={idx} value={country.code}>
+                            {country.flag} {country.code}
+                          </option>
+                        ))}
+                      </select>
+                      <input className="w-full bg-white border border-slate-200 rounded-r-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-sm" placeholder={t.form.fPhonePlaceholder} type="tel" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-primary mb-1">{t.form.fCountry}</label>
+                    <input className="w-full bg-white border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-sm" placeholder={t.form.fCountryPlaceholder} type="text" />
+                  </div>
                 </div>
-                <span className="text-white font-bold text-sm">
-                  {t.hero.arrival}
-                </span>
-              </div>
-              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-full border border-white/20 shadow-lg">
-                <div className="bg-secondary p-1.5 rounded-full text-primary flex items-center justify-center">
-                  <MessageSquare className="w-4 h-4" />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-bold text-primary mb-1">{t.form.fVisa}</label>
+                    <select className="w-full bg-white border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-slate-700 text-sm">
+                      <option>{t.form.fVisaOpt1}</option>
+                      <option>{t.form.fVisaOpt2}</option>
+                      <option>{t.form.fVisaOpt3}</option>
+                      <option>{t.form.fVisaOpt4}</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-primary mb-1">{t.form.fProg}</label>
+                    <select className="w-full bg-white border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-slate-700 text-sm">
+                      <option>{t.form.fProgOpt1}</option>
+                      <option>{t.form.fProgOpt2}</option>
+                    </select>
+                  </div>
                 </div>
-                <span className="text-white font-bold text-sm">
-                  {t.hero.multilingual}
-                </span>
-              </div>
+                <div>
+                  <label className="block text-sm font-bold text-primary mb-1">{t.form.fDate}</label>
+                  <select className="w-full bg-white border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-slate-700 text-sm">
+                    <option>{t.form.fDateOpt1}</option>
+                    <option>{t.form.fDateOpt2}</option>
+                    <option>{t.form.fDateOpt3}</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-primary mb-1">{t.form.fQuestion}</label>
+                  <textarea className="w-full bg-white border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-sm resize-none h-24" placeholder={t.form.fQuestionPlaceholder}></textarea>
+                </div>
+                <button className="w-full py-4 bg-[#FFB800] text-black rounded-lg font-bold text-base hover:bg-[#F0AD00] transition-all mt-4" type="submit">
+                  {t.form.fSubmit}
+                </button>
+              </form>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Testimonials Section */}
-      <section className="py-12 bg-surface overflow-hidden relative z-20 -mt-10 rounded-t-[3rem]">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {/* Testimonial Item 1 */}
-            <div className="flex items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-100 bento-card">
-              <img
-                className="w-12 h-12 rounded-full object-cover mr-4"
-                alt="Ana Silva"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeyyNzjtg43TxcvsdigBVEUpiyu7-fX-nllStyVwv2CFjT1ZBt98REPre91vgrKsmGXntnlUXGNlZ5p1uz7RFM4ZDMep8VIYlEuBpS9f52nAYMNjFjIwMedlWHDTaE3HVjXrQntwPi6vJc72MX7Msf2bl7pbkIBcHCb14-zQ-YvtMt3kgNo9sgZ4V_2Q2LQ6L77ne1m-bnLKeK3ho6T3rA0SysyhEg8qAYM8Qv_lDS-lZexLKHixdbP-zhWu7LEJ10QCbdICcjXbE"
-              />
-              <div>
-                <div className="flex items-center">
-                  <h4 className="font-bold text-primary mr-2">Ana Silva</h4>
-                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
-                    Brazil
-                  </span>
-                </div>
-                <p className="text-xs text-slate-600 italic">
-                  "{t.testimonials.t1}"
-                </p>
-              </div>
-            </div>
 
-            {/* Testimonial Item 2 */}
-            <div className="flex items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-100 bento-card">
-              <img
-                className="w-12 h-12 rounded-full object-cover mr-4"
-                alt="Mateo Gomez"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdJYHqjLSW6C7jmZFqx44j1jy1BZE0VJEKrCMbgauU3BfOnASRxAxjyXKuFndyBwri_S1i2nACgzsOJCfBwdU8UpD9ckOAQqpyt31OOHjQcex_Z9BV5F0isbyxecgBtVNj2WAX0GH6gLFBK-XqUf_o12YRrcqmi0GIr8eXpZMKrK4o8hLvfbM9XTPI0BokKr3onNIS64nildxkpmmMH3nBTUsgFxWlMnq4u6vVZrF14wx8GkN68GQqa5eAvLk4QreQ0oxlZotnP-o"
-              />
-              <div>
-                <div className="flex items-center">
-                  <h4 className="font-bold text-primary mr-2">Mateo Gomez</h4>
-                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
-                    Colombia
-                  </span>
-                </div>
-                <p className="text-xs text-slate-600 italic">
-                  "{t.testimonials.t2}"
-                </p>
-              </div>
-            </div>
+      
+      {/* Reviews Section */}
+      <section className="py-12 bg-surface overflow-hidden relative z-20 -mt-10 rounded-t-[3rem] group">
+        <div className="absolute -right-8 -top-8 text-primary/5 group-hover:text-primary/10 transition-colors pointer-events-none">
+          <GraduationCap className="w-[200px] h-[200px]" />
+        </div>
+        <div className="max-w-7xl mx-auto px-8 mb-8 flex items-center justify-between relative z-10">
+          <h2 className="text-4xl md:text-5xl font-black text-primary flex items-center">
+            <MessageCircle className="w-10 h-10 md:w-12 md:h-12 mr-4 text-secondary" />
+            {t.testimonials.meet}
+          </h2>
+        </div>
+        
+        {/* Marquee Container */}
+        <div className="relative flex flex-col gap-6 overflow-x-hidden group">
+          {/* Row 1 */}
+          <div className="relative flex overflow-x-hidden">
+            <div className="animate-marquee whitespace-nowrap flex items-center gap-6 py-4 group-hover:[animation-play-state:paused]">
+              {[1, 2, 3, 1, 2, 3].map((item, idx) => (
+                <div 
+                  key={`r1-${idx}`} 
+                  className="relative inline-flex flex-col bg-white p-5 rounded-3xl shadow-sm border border-slate-100 min-w-[400px] cursor-pointer"
+                  onMouseEnter={() => setHoveredReview(`r1-${idx}`)}
+                  onMouseLeave={() => setHoveredReview(null)}
+                >
+                  <div className="flex items-center mb-3">
+                    <img
+                      className="w-12 h-12 rounded-full object-cover mr-3"
+                      alt="Student"
+                      src={
+                        item === 1 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuDeyyNzjtg43TxcvsdigBVEUpiyu7-fX-nllStyVwv2CFjT1ZBt98REPre91vgrKsmGXntnlUXGNlZ5p1uz7RFM4ZDMep8VIYlEuBpS9f52nAYMNjFjIwMedlWHDTaE3HVjXrQntwPi6vJc72MX7Msf2bl7pbkIBcHCb14-zQ-YvtMt3kgNo9sgZ4V_2Q2LQ6L77ne1m-bnLKeK3ho6T3rA0SysyhEg8qAYM8Qv_lDS-lZexLKHixdbP-zhWu7LEJ10QCbdICcjXbE" :
+                        item === 2 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuAn8q4W72-1c2E76JvIqQ68z2Q_F40Yy1E4S49zD7vL91wM870V4q8404L8n30v74390P8v_8_49504N_68305_5994200420084004040004040400400404040040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040" :
+                        "https://lh3.googleusercontent.com/aida-public/AB6AXuC1qyhcMpMop-1k5dCgPnQ1PzypwiCk2RAkQ_Kshe5Pfy2XPNaQ3s5wSKcoai9GNhxjoCi5XTzcGj3ILiXF2NkpPPs4gxVTK1cE-XjxP5V7wj43HamWz9NptWCvtgfrCM94IkUd7MyHLjTFRHTFve9MBgoLizK_v0YZdB6NzPIbX50D9z6d3a4Xhqa5y7tVxZHhsA_eFgerVAZDTPYBvWvk2tDU5UWDHXwQfPObJn6WP0jxUISQ3UQPZ0A7UUk3jTYIhUxR1Pj7bBc"
+                      }
+                    />
+                    <div className="flex items-center gap-2 w-full">
+                      <span className="font-bold text-slate-900">{item === 1 ? "AbadCrypto" : item === 2 ? "Sol Martin" : "Aleix Farnós"}</span>
+                      <span className="text-[10px] font-bold text-slate-400 tracking-wider">{item === 1 ? "YOUTUBER" : item === 2 ? "CREADORA" : "YOUTUBER"}</span>
+                      <span className="text-xs font-bold text-emerald-500 flex items-center ml-auto">
+                        <svg className="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        {item === 1 ? "76.3K Subs" : item === 2 ? "+80K Views" : "+20 Canales"}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-slate-500 text-sm whitespace-normal">
+                    "{item === 1 ? t.testimonials.t1 : item === 2 ? t.testimonials.t2 : t.testimonials.t3}"
+                  </p>
 
-            {/* Testimonial Item 3 */}
-            <div className="flex items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-100 bento-card">
-              <img
-                className="w-12 h-12 rounded-full object-cover mr-4"
-                alt="Elif Demir"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0lsFRIQv10NycaDGTduh2sf6wEeCYj5vKMSKlqpKA0t907LxNVndMG7Fe-sVaxfAD8SDpTP8KVtbxVc8eHv4R38SBHFO9xD8iikrAqEwPgrLo1RnUbC8F0Eh_jwcM5yqYqnusKwOhRvjhArLyBqdSshDGaMh4nXbEZuuCP1hQ6CU6IGTzC2XOCcf5Uayb2IFMQqnbNWkkCXtYbVWXf9-RdhJWeJpSj1siSPxOu-9q1kPa_apfbGLNuZ9CSW7kTrDDdij7KwTu0Qw"
-              />
-              <div>
-                <div className="flex items-center">
-                  <h4 className="font-bold text-primary mr-2">Elif Demir</h4>
-                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
-                    Turkey
-                  </span>
+                  {/* Hover Bubble */}
+                  {hoveredReview === `r1-${idx}` && (
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-[400px] bg-[#0f172a] text-white p-6 rounded-3xl shadow-2xl z-30 whitespace-normal">
+                      <div className="flex items-center mb-4 pb-4 border-b border-slate-700">
+                        <img
+                          className="w-12 h-12 rounded-full object-cover mr-3"
+                          alt="Student"
+                          src={
+                            item === 1 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuDeyyNzjtg43TxcvsdigBVEUpiyu7-fX-nllStyVwv2CFjT1ZBt98REPre91vgrKsmGXntnlUXGNlZ5p1uz7RFM4ZDMep8VIYlEuBpS9f52nAYMNjFjIwMedlWHDTaE3HVjXrQntwPi6vJc72MX7Msf2bl7pbkIBcHCb14-zQ-YvtMt3kgNo9sgZ4V_2Q2LQ6L77ne1m-bnLKeK3ho6T3rA0SysyhEg8qAYM8Qv_lDS-lZexLKHixdbP-zhWu7LEJ10QCbdICcjXbE" :
+                            item === 2 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuAn8q4W72-1c2E76JvIqQ68z2Q_F40Yy1E4S49zD7vL91wM870V4q8404L8n30v74390P8v_8_49504N_68305_5994200420084004040004040400400404040040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040" :
+                            "https://lh3.googleusercontent.com/aida-public/AB6AXuC1qyhcMpMop-1k5dCgPnQ1PzypwiCk2RAkQ_Kshe5Pfy2XPNaQ3s5wSKcoai9GNhxjoCi5XTzcGj3ILiXF2NkpPPs4gxVTK1cE-XjxP5V7wj43HamWz9NptWCvtgfrCM94IkUd7MyHLjTFRHTFve9MBgoLizK_v0YZdB6NzPIbX50D9z6d3a4Xhqa5y7tVxZHhsA_eFgerVAZDTPYBvWvk2tDU5UWDHXwQfPObJn6WP0jxUISQ3UQPZ0A7UUk3jTYIhUxR1Pj7bBc"
+                          }
+                        />
+                        <div className="flex flex-col">
+                          <span className="font-bold text-white">{item === 1 ? "AbadCrypto" : item === 2 ? "Sol Martin" : "Aleix Farnós"}</span>
+                          <span className="text-[10px] font-bold text-slate-400 tracking-wider">{item === 1 ? "YOUTUBER" : item === 2 ? "CREADORA" : "YOUTUBER"}</span>
+                        </div>
+                      </div>
+                      <p className="text-sm text-slate-300 italic leading-relaxed">"{item === 1 ? t.testimonials.t1Long : item === 2 ? t.testimonials.t2Long : t.testimonials.t3Long}"</p>
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#0f172a]"></div>
+                    </div>
+                  )}
                 </div>
-                <p className="text-xs text-slate-600 italic">
-                  "{t.testimonials.t3}"
-                </p>
-              </div>
+              ))}
             </div>
+            {/* Duplicate for seamless loop */}
+            <div className="animate-marquee whitespace-nowrap flex items-center gap-6 py-4 absolute top-0 group-hover:[animation-play-state:paused]" aria-hidden="true">
+              {[1, 2, 3, 1, 2, 3].map((item, idx) => (
+                <div 
+                  key={`dup-r1-${idx}`} 
+                  className="relative inline-flex flex-col bg-white p-5 rounded-3xl shadow-sm border border-slate-100 min-w-[400px] cursor-pointer"
+                  onMouseEnter={() => setHoveredReview(`dup-r1-${idx}`)}
+                  onMouseLeave={() => setHoveredReview(null)}
+                >
+                  <div className="flex items-center mb-3">
+                    <img
+                      className="w-12 h-12 rounded-full object-cover mr-3"
+                      alt="Student"
+                      src={
+                        item === 1 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuDeyyNzjtg43TxcvsdigBVEUpiyu7-fX-nllStyVwv2CFjT1ZBt98REPre91vgrKsmGXntnlUXGNlZ5p1uz7RFM4ZDMep8VIYlEuBpS9f52nAYMNjFjIwMedlWHDTaE3HVjXrQntwPi6vJc72MX7Msf2bl7pbkIBcHCb14-zQ-YvtMt3kgNo9sgZ4V_2Q2LQ6L77ne1m-bnLKeK3ho6T3rA0SysyhEg8qAYM8Qv_lDS-lZexLKHixdbP-zhWu7LEJ10QCbdICcjXbE" :
+                        item === 2 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuAn8q4W72-1c2E76JvIqQ68z2Q_F40Yy1E4S49zD7vL91wM870V4q8404L8n30v74390P8v_8_49504N_68305_5994200420084004040004040400400404040040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040" :
+                        "https://lh3.googleusercontent.com/aida-public/AB6AXuC1qyhcMpMop-1k5dCgPnQ1PzypwiCk2RAkQ_Kshe5Pfy2XPNaQ3s5wSKcoai9GNhxjoCi5XTzcGj3ILiXF2NkpPPs4gxVTK1cE-XjxP5V7wj43HamWz9NptWCvtgfrCM94IkUd7MyHLjTFRHTFve9MBgoLizK_v0YZdB6NzPIbX50D9z6d3a4Xhqa5y7tVxZHhsA_eFgerVAZDTPYBvWvk2tDU5UWDHXwQfPObJn6WP0jxUISQ3UQPZ0A7UUk3jTYIhUxR1Pj7bBc"
+                      }
+                    />
+                    <div className="flex items-center gap-2 w-full">
+                      <span className="font-bold text-slate-900">{item === 1 ? "AbadCrypto" : item === 2 ? "Sol Martin" : "Aleix Farnós"}</span>
+                      <span className="text-[10px] font-bold text-slate-400 tracking-wider">{item === 1 ? "YOUTUBER" : item === 2 ? "CREADORA" : "YOUTUBER"}</span>
+                      <span className="text-xs font-bold text-emerald-500 flex items-center ml-auto">
+                        <svg className="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        {item === 1 ? "76.3K Subs" : item === 2 ? "+80K Views" : "+20 Canales"}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-slate-500 text-sm whitespace-normal">
+                    "{item === 1 ? t.testimonials.t1 : item === 2 ? t.testimonials.t2 : t.testimonials.t3}"
+                  </p>
 
-            {/* Testimonial Item 4 (Gallery Entry) */}
-            <div className="flex items-center justify-center bg-secondary p-6 rounded-2xl shadow-sm border border-secondary cursor-pointer hover:bg-secondary/90 transition-all bento-card relative overflow-hidden group">
-              <div className="absolute -right-4 -bottom-4 text-primary/10 group-hover:text-primary/20 transition-colors">
-                <GraduationCap className="w-24 h-24" />
-              </div>
-              <div className="text-center relative z-10">
-                <h4 className="font-black text-primary text-xl uppercase tracking-tighter">
-                  {t.testimonials.meet}
-                </h4>
-                <p className="text-xs font-bold text-primary/70 mt-1">
-                  {t.testimonials.gallery}
-                </p>
-              </div>
+                  {/* Hover Bubble */}
+                  {hoveredReview === `dup-r1-${idx}` && (
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-[400px] bg-[#0f172a] text-white p-6 rounded-3xl shadow-2xl z-30 whitespace-normal">
+                      <div className="flex items-center mb-4 pb-4 border-b border-slate-700">
+                        <img
+                          className="w-12 h-12 rounded-full object-cover mr-3"
+                          alt="Student"
+                          src={
+                            item === 1 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuDeyyNzjtg43TxcvsdigBVEUpiyu7-fX-nllStyVwv2CFjT1ZBt98REPre91vgrKsmGXntnlUXGNlZ5p1uz7RFM4ZDMep8VIYlEuBpS9f52nAYMNjFjIwMedlWHDTaE3HVjXrQntwPi6vJc72MX7Msf2bl7pbkIBcHCb14-zQ-YvtMt3kgNo9sgZ4V_2Q2LQ6L77ne1m-bnLKeK3ho6T3rA0SysyhEg8qAYM8Qv_lDS-lZexLKHixdbP-zhWu7LEJ10QCbdICcjXbE" :
+                            item === 2 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuAn8q4W72-1c2E76JvIqQ68z2Q_F40Yy1E4S49zD7vL91wM870V4q8404L8n30v74390P8v_8_49504N_68305_5994200420084004040004040400400404040040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040" :
+                            "https://lh3.googleusercontent.com/aida-public/AB6AXuC1qyhcMpMop-1k5dCgPnQ1PzypwiCk2RAkQ_Kshe5Pfy2XPNaQ3s5wSKcoai9GNhxjoCi5XTzcGj3ILiXF2NkpPPs4gxVTK1cE-XjxP5V7wj43HamWz9NptWCvtgfrCM94IkUd7MyHLjTFRHTFve9MBgoLizK_v0YZdB6NzPIbX50D9z6d3a4Xhqa5y7tVxZHhsA_eFgerVAZDTPYBvWvk2tDU5UWDHXwQfPObJn6WP0jxUISQ3UQPZ0A7UUk3jTYIhUxR1Pj7bBc"
+                          }
+                        />
+                        <div className="flex flex-col">
+                          <span className="font-bold text-white">{item === 1 ? "AbadCrypto" : item === 2 ? "Sol Martin" : "Aleix Farnós"}</span>
+                          <span className="text-[10px] font-bold text-slate-400 tracking-wider">{item === 1 ? "YOUTUBER" : item === 2 ? "CREADORA" : "YOUTUBER"}</span>
+                        </div>
+                      </div>
+                      <p className="text-sm text-slate-300 italic leading-relaxed">"{item === 1 ? t.testimonials.t1Long : item === 2 ? t.testimonials.t2Long : t.testimonials.t3Long}"</p>
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#0f172a]"></div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2 */}
+          <div className="relative flex overflow-x-hidden">
+            <div className="animate-marquee-reverse whitespace-nowrap flex items-center gap-6 py-4 group-hover:[animation-play-state:paused]">
+              {[3, 1, 2, 3, 1, 2].map((item, idx) => (
+                <div 
+                  key={`r2-${idx}`} 
+                  className="relative inline-flex flex-col bg-white p-5 rounded-3xl shadow-sm border border-slate-100 min-w-[400px] cursor-pointer"
+                  onMouseEnter={() => setHoveredReview(`r2-${idx}`)}
+                  onMouseLeave={() => setHoveredReview(null)}
+                >
+                  <div className="flex items-center mb-3">
+                    <img
+                      className="w-12 h-12 rounded-full object-cover mr-3"
+                      alt="Student"
+                      src={
+                        item === 1 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuDeyyNzjtg43TxcvsdigBVEUpiyu7-fX-nllStyVwv2CFjT1ZBt98REPre91vgrKsmGXntnlUXGNlZ5p1uz7RFM4ZDMep8VIYlEuBpS9f52nAYMNjFjIwMedlWHDTaE3HVjXrQntwPi6vJc72MX7Msf2bl7pbkIBcHCb14-zQ-YvtMt3kgNo9sgZ4V_2Q2LQ6L77ne1m-bnLKeK3ho6T3rA0SysyhEg8qAYM8Qv_lDS-lZexLKHixdbP-zhWu7LEJ10QCbdICcjXbE" :
+                        item === 2 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuAn8q4W72-1c2E76JvIqQ68z2Q_F40Yy1E4S49zD7vL91wM870V4q8404L8n30v74390P8v_8_49504N_68305_5994200420084004040004040400400404040040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040" :
+                        "https://lh3.googleusercontent.com/aida-public/AB6AXuC1qyhcMpMop-1k5dCgPnQ1PzypwiCk2RAkQ_Kshe5Pfy2XPNaQ3s5wSKcoai9GNhxjoCi5XTzcGj3ILiXF2NkpPPs4gxVTK1cE-XjxP5V7wj43HamWz9NptWCvtgfrCM94IkUd7MyHLjTFRHTFve9MBgoLizK_v0YZdB6NzPIbX50D9z6d3a4Xhqa5y7tVxZHhsA_eFgerVAZDTPYBvWvk2tDU5UWDHXwQfPObJn6WP0jxUISQ3UQPZ0A7UUk3jTYIhUxR1Pj7bBc"
+                      }
+                    />
+                    <div className="flex items-center gap-2 w-full">
+                      <span className="font-bold text-slate-900">{item === 1 ? "Agustín Fernandez" : item === 2 ? "Maria Garcia" : "David Chen"}</span>
+                      <span className="text-[10px] font-bold text-slate-400 tracking-wider">{item === 1 ? "CREADOR" : item === 2 ? "ALUMNI" : "STUDENT"}</span>
+                      <span className="text-xs font-bold text-emerald-500 flex items-center ml-auto">
+                        <svg className="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        {item === 1 ? "$3.300/mes" : item === 2 ? "Top 1%" : "Honors"}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-slate-500 text-sm whitespace-normal">
+                    "{item === 1 ? t.testimonials.t1 : item === 2 ? t.testimonials.t2 : t.testimonials.t3}"
+                  </p>
+
+                  {/* Hover Bubble */}
+                  {hoveredReview === `r2-${idx}` && (
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-[400px] bg-[#0f172a] text-white p-6 rounded-3xl shadow-2xl z-30 whitespace-normal">
+                      <div className="flex items-center mb-4 pb-4 border-b border-slate-700">
+                        <img
+                          className="w-12 h-12 rounded-full object-cover mr-3"
+                          alt="Student"
+                          src={
+                            item === 1 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuDeyyNzjtg43TxcvsdigBVEUpiyu7-fX-nllStyVwv2CFjT1ZBt98REPre91vgrKsmGXntnlUXGNlZ5p1uz7RFM4ZDMep8VIYlEuBpS9f52nAYMNjFjIwMedlWHDTaE3HVjXrQntwPi6vJc72MX7Msf2bl7pbkIBcHCb14-zQ-YvtMt3kgNo9sgZ4V_2Q2LQ6L77ne1m-bnLKeK3ho6T3rA0SysyhEg8qAYM8Qv_lDS-lZexLKHixdbP-zhWu7LEJ10QCbdICcjXbE" :
+                            item === 2 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuAn8q4W72-1c2E76JvIqQ68z2Q_F40Yy1E4S49zD7vL91wM870V4q8404L8n30v74390P8v_8_49504N_68305_5994200420084004040004040400400404040040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040" :
+                            "https://lh3.googleusercontent.com/aida-public/AB6AXuC1qyhcMpMop-1k5dCgPnQ1PzypwiCk2RAkQ_Kshe5Pfy2XPNaQ3s5wSKcoai9GNhxjoCi5XTzcGj3ILiXF2NkpPPs4gxVTK1cE-XjxP5V7wj43HamWz9NptWCvtgfrCM94IkUd7MyHLjTFRHTFve9MBgoLizK_v0YZdB6NzPIbX50D9z6d3a4Xhqa5y7tVxZHhsA_eFgerVAZDTPYBvWvk2tDU5UWDHXwQfPObJn6WP0jxUISQ3UQPZ0A7UUk3jTYIhUxR1Pj7bBc"
+                          }
+                        />
+                        <div className="flex flex-col">
+                          <span className="font-bold text-white">{item === 1 ? "Agustín Fernandez" : item === 2 ? "Maria Garcia" : "David Chen"}</span>
+                          <span className="text-[10px] font-bold text-slate-400 tracking-wider">{item === 1 ? "CREADOR" : item === 2 ? "ALUMNI" : "STUDENT"}</span>
+                        </div>
+                      </div>
+                      <p className="text-sm text-slate-300 italic leading-relaxed">"{item === 1 ? t.testimonials.t1Long : item === 2 ? t.testimonials.t2Long : t.testimonials.t3Long}"</p>
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#0f172a]"></div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            {/* Duplicate for seamless loop */}
+            <div className="animate-marquee-reverse whitespace-nowrap flex items-center gap-6 py-4 absolute top-0 group-hover:[animation-play-state:paused]" aria-hidden="true">
+              {[3, 1, 2, 3, 1, 2].map((item, idx) => (
+                <div 
+                  key={`dup-r2-${idx}`} 
+                  className="relative inline-flex flex-col bg-white p-5 rounded-3xl shadow-sm border border-slate-100 min-w-[400px] cursor-pointer"
+                  onMouseEnter={() => setHoveredReview(`dup-r2-${idx}`)}
+                  onMouseLeave={() => setHoveredReview(null)}
+                >
+                  <div className="flex items-center mb-3">
+                    <img
+                      className="w-12 h-12 rounded-full object-cover mr-3"
+                      alt="Student"
+                      src={
+                        item === 1 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuDeyyNzjtg43TxcvsdigBVEUpiyu7-fX-nllStyVwv2CFjT1ZBt98REPre91vgrKsmGXntnlUXGNlZ5p1uz7RFM4ZDMep8VIYlEuBpS9f52nAYMNjFjIwMedlWHDTaE3HVjXrQntwPi6vJc72MX7Msf2bl7pbkIBcHCb14-zQ-YvtMt3kgNo9sgZ4V_2Q2LQ6L77ne1m-bnLKeK3ho6T3rA0SysyhEg8qAYM8Qv_lDS-lZexLKHixdbP-zhWu7LEJ10QCbdICcjXbE" :
+                        item === 2 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuAn8q4W72-1c2E76JvIqQ68z2Q_F40Yy1E4S49zD7vL91wM870V4q8404L8n30v74390P8v_8_49504N_68305_5994200420084004040004040400400404040040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040" :
+                        "https://lh3.googleusercontent.com/aida-public/AB6AXuC1qyhcMpMop-1k5dCgPnQ1PzypwiCk2RAkQ_Kshe5Pfy2XPNaQ3s5wSKcoai9GNhxjoCi5XTzcGj3ILiXF2NkpPPs4gxVTK1cE-XjxP5V7wj43HamWz9NptWCvtgfrCM94IkUd7MyHLjTFRHTFve9MBgoLizK_v0YZdB6NzPIbX50D9z6d3a4Xhqa5y7tVxZHhsA_eFgerVAZDTPYBvWvk2tDU5UWDHXwQfPObJn6WP0jxUISQ3UQPZ0A7UUk3jTYIhUxR1Pj7bBc"
+                      }
+                    />
+                    <div className="flex items-center gap-2 w-full">
+                      <span className="font-bold text-slate-900">{item === 1 ? "Agustín Fernandez" : item === 2 ? "Maria Garcia" : "David Chen"}</span>
+                      <span className="text-[10px] font-bold text-slate-400 tracking-wider">{item === 1 ? "CREADOR" : item === 2 ? "ALUMNI" : "STUDENT"}</span>
+                      <span className="text-xs font-bold text-emerald-500 flex items-center ml-auto">
+                        <svg className="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        {item === 1 ? "$3.300/mes" : item === 2 ? "Top 1%" : "Honors"}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-slate-500 text-sm whitespace-normal">
+                    "{item === 1 ? t.testimonials.t1 : item === 2 ? t.testimonials.t2 : t.testimonials.t3}"
+                  </p>
+
+                  {/* Hover Bubble */}
+                  {hoveredReview === `dup-r2-${idx}` && (
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-[400px] bg-[#0f172a] text-white p-6 rounded-3xl shadow-2xl z-30 whitespace-normal">
+                      <div className="flex items-center mb-4 pb-4 border-b border-slate-700">
+                        <img
+                          className="w-12 h-12 rounded-full object-cover mr-3"
+                          alt="Student"
+                          src={
+                            item === 1 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuDeyyNzjtg43TxcvsdigBVEUpiyu7-fX-nllStyVwv2CFjT1ZBt98REPre91vgrKsmGXntnlUXGNlZ5p1uz7RFM4ZDMep8VIYlEuBpS9f52nAYMNjFjIwMedlWHDTaE3HVjXrQntwPi6vJc72MX7Msf2bl7pbkIBcHCb14-zQ-YvtMt3kgNo9sgZ4V_2Q2LQ6L77ne1m-bnLKeK3ho6T3rA0SysyhEg8qAYM8Qv_lDS-lZexLKHixdbP-zhWu7LEJ10QCbdICcjXbE" :
+                            item === 2 ? "https://lh3.googleusercontent.com/aida-public/AB6AXuAn8q4W72-1c2E76JvIqQ68z2Q_F40Yy1E4S49zD7vL91wM870V4q8404L8n30v74390P8v_8_49504N_68305_5994200420084004040004040400400404040040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040" :
+                            "https://lh3.googleusercontent.com/aida-public/AB6AXuC1qyhcMpMop-1k5dCgPnQ1PzypwiCk2RAkQ_Kshe5Pfy2XPNaQ3s5wSKcoai9GNhxjoCi5XTzcGj3ILiXF2NkpPPs4gxVTK1cE-XjxP5V7wj43HamWz9NptWCvtgfrCM94IkUd7MyHLjTFRHTFve9MBgoLizK_v0YZdB6NzPIbX50D9z6d3a4Xhqa5y7tVxZHhsA_eFgerVAZDTPYBvWvk2tDU5UWDHXwQfPObJn6WP0jxUISQ3UQPZ0A7UUk3jTYIhUxR1Pj7bBc"
+                          }
+                        />
+                        <div className="flex flex-col">
+                          <span className="font-bold text-white">{item === 1 ? "Agustín Fernandez" : item === 2 ? "Maria Garcia" : "David Chen"}</span>
+                          <span className="text-[10px] font-bold text-slate-400 tracking-wider">{item === 1 ? "CREADOR" : item === 2 ? "ALUMNI" : "STUDENT"}</span>
+                        </div>
+                      </div>
+                      <p className="text-sm text-slate-300 italic leading-relaxed">"{item === 1 ? t.testimonials.t1Long : item === 2 ? t.testimonials.t2Long : t.testimonials.t3Long}"</p>
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#0f172a]"></div>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Campus Pictures Section */}
       <section className="py-24 bg-white overflow-hidden">
@@ -280,7 +612,7 @@ export default function App() {
           {/* Top Full-Width Card */}
           <div className="mb-8">
             <div className="bg-slate-50 p-10 rounded-[2.5rem] border border-slate-100 relative overflow-hidden group hover:border-primary/20 transition-all">
-              <div className="absolute -right-8 -top-8 text-primary/5 group-hover:text-primary/10 transition-colors">
+              <div className="absolute -right-8 -top-8 text-primary/5 group-hover:text-primary/10 transition-colors pointer-events-none">
                 <Building2 className="w-[200px] h-[200px]" />
               </div>
               <div className="relative z-10">
@@ -297,125 +629,96 @@ export default function App() {
             </div>
           </div>
 
-          {/* Side-by-Side Cards */}
-          <div className="grid md:grid-cols-2 gap-8 items-stretch">
-            {/* Slider Column */}
-            <div className="relative group h-[400px] md:h-[500px]">
-              <div className="w-full h-full bg-slate-100 rounded-[2.5rem] overflow-hidden shadow-2xl relative border-4 border-slate-50">
+          {/* Bento Box Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-stretch">
+            {/* Photo Gallery (Left Side) */}
+            <div className="lg:col-span-3 bg-white rounded-[2.5rem] p-6 shadow-sm border border-slate-100 flex flex-col h-[400px] md:h-[500px]">
+              <div className="flex justify-between items-center mb-6 px-2">
+                <h3 className="text-2xl font-black text-primary">{t.campus.photoGallery}</h3>
+                <div className="flex space-x-2">
+                  <button 
+                    onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? carouselImages.length - 1 : prev - 1))}
+                    className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors text-slate-600"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button 
+                    onClick={() => setCurrentImageIndex((prev) => (prev === carouselImages.length - 1 ? 0 : prev + 1))}
+                    className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors text-slate-600"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+              <div className="flex-1 rounded-[2rem] overflow-hidden relative">
                 <img
                   className="w-full h-full object-cover transition-all duration-500"
                   alt="Campus view"
                   src={carouselImages[currentImageIndex]}
                 />
-                <div className="absolute inset-0 flex items-center justify-between px-6">
-                  <button 
-                    onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? carouselImages.length - 1 : prev - 1))}
-                    className="bg-white/20 backdrop-blur-md text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/40 transition-all"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-                  <button 
-                    onClick={() => setCurrentImageIndex((prev) => (prev === carouselImages.length - 1 ? 0 : prev + 1))}
-                    className="bg-white/20 backdrop-blur-md text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/40 transition-all"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
-                </div>
-                <div className="absolute bottom-6 left-8 bg-black/30 backdrop-blur-md px-4 py-2 rounded-xl text-white font-bold text-xl">
-                  {currentImageIndex + 1} / {carouselImages.length}
-                </div>
               </div>
             </div>
 
-            {/* VIP Onboarding Card */}
-            <div className="bg-primary p-10 rounded-[2.5rem] group hover:brightness-110 transition-all relative overflow-hidden flex flex-col justify-center">
-              <div className="absolute -right-8 -bottom-8 text-white/5 group-hover:text-white/10 transition-colors">
-                <Star className="w-[200px] h-[200px] fill-current" />
+            {/* 2x2 Grid (Right Side) */}
+            <div className="lg:col-span-2 grid grid-cols-2 gap-4">
+              {/* VIP Onboarding */}
+              <div className="bg-primary rounded-[2.5rem] p-6 flex flex-col justify-between aspect-square group hover:brightness-110 transition-all">
+                <div className="w-10 h-10 rounded-full border border-secondary/30 flex items-center justify-center">
+                  <ShieldCheck className="w-5 h-5 text-secondary" />
+                </div>
+                <h4 className="text-white font-bold text-xl leading-tight">
+                  {t.campus.vipOnboarding}
+                </h4>
               </div>
-              <div className="relative z-10">
-                <div className="bg-white/20 text-white w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
-                  <Star className="w-6 h-6 fill-current" />
+
+              {/* Airport Pickup */}
+              <div className="bg-white rounded-[2.5rem] p-6 flex flex-col justify-between aspect-square shadow-sm border border-slate-100 group hover:border-primary/20 transition-all">
+                <div className="w-10 h-10 rounded-full border border-primary/20 flex items-center justify-center">
+                  <Bus className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="text-3xl font-black text-white mb-4 leading-tight">
-                  {t.campus.vipTitle}
-                </h3>
-                <p className="text-white/80 text-lg mb-10">
-                  {t.campus.vipDesc}
-                </p>
-                <div className="flex items-center space-x-4">
-                  <div className="flex -space-x-3">
-                    <img
-                      className="w-10 h-10 rounded-full border-2 border-primary object-cover"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBsbxvR8AGwyFQO0-Aa6VW0qxUcke91HpuDkB-aYaf9E_QBMj4W7_wi7-NPTxLfxey6IQA__sYgaW3gAsbza9qH6PZXDqDeQ0AZWiD7zzEbyEA9DYAR9SWFlLqdvjSJxjwS5IWBEjrofTbEh1Kqv0ZuhgcaW1ZeXPBHM0tQZEJvxr1AIasQ13G-V931TqggLpibZY5wYZ2LQ39EM7f6iA8XF8KKbZjx8syXYFbeAYEROWVCn2jch9Khx3GZEzdN2W89YYzSRLmf-s"
-                      alt="Student"
-                    />
-                    <img
-                      className="w-10 h-10 rounded-full border-2 border-primary object-cover"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHTQIvrujfHihezw_0YiHFD3iOzEABWb2Om5UxuPMlU8B4B2O-K0JpFS1zx1m5GtFWRruxROToFmyhGXpPcYTA9a_xlvnFn7Z-ygZLzU5iZv-KO8U6EHkFnNJ9tuBWA4o32OJwNNME9DsllGeBiJMdlZerZup3KrAbw82bSi-zj8CvfJH8ZHN6WnzC-x-6_l-b61rLVDhHiW-tOS7vZEj5k3A67j43tgvt29u1fNgrkScZ9vZUJFAkuNEUx71IY0ny1iIEbDdIWI"
-                      alt="Student"
-                    />
-                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-[10px] font-bold text-white border-2 border-primary">
-                      +500
-                    </div>
-                  </div>
-                  <span className="text-white/70 text-xs font-bold uppercase tracking-wider">
-                    {t.campus.studentsSupported}
-                  </span>
+                <h4 className="text-primary font-bold text-xl leading-tight">
+                  {t.campus.airportPickup}
+                </h4>
+              </div>
+
+              {/* 24/7 Support */}
+              <div className="bg-secondary rounded-[2.5rem] p-6 flex flex-col justify-between aspect-square group hover:brightness-105 transition-all">
+                <div className="w-10 h-10 rounded-full border border-primary/20 flex items-center justify-center">
+                  <Headphones className="w-5 h-5 text-primary" />
                 </div>
+                <h4 className="text-primary font-bold text-xl leading-tight">
+                  {t.campus.support247}
+                </h4>
+              </div>
+
+              {/* Bank Opening */}
+              <div className="bg-secondary rounded-[2.5rem] p-6 flex flex-col justify-between aspect-square group hover:brightness-105 transition-all">
+                <div className="w-10 h-10 rounded-full border border-primary/20 flex items-center justify-center">
+                  <CreditCard className="w-5 h-5 text-primary" />
+                </div>
+                <h4 className="text-primary font-bold text-xl leading-tight">
+                  {t.campus.bankOpening}
+                </h4>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Unmatched Campus Benefits */}
+      {/* Multimedia Section */}
       <section className="py-24 bg-surface-container">
         <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-4xl font-black text-primary tracking-tight mb-8">
-              {t.benefits.title.split(' ').slice(0, 2).join(' ')} <br />
-              {t.benefits.title.split(' ').slice(2).join(' ')}
+              {t.multimedia.title}
             </h2>
             <div className="space-y-6">
-              <div className="flex items-start space-x-4 group">
-                <div className="bg-primary text-white p-3 rounded-2xl group-hover:bg-secondary group-hover:text-primary transition-all">
-                  <Dumbbell className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-xl text-primary mb-1">
-                    {t.benefits.b1Title}
-                  </h4>
-                  <p className="text-slate-600">
-                    {t.benefits.b1Desc}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4 group">
-                <div className="bg-primary text-white p-3 rounded-2xl group-hover:bg-secondary group-hover:text-primary transition-all">
-                  <FileText className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-xl text-primary mb-1">
-                    {t.benefits.b2Title}
-                  </h4>
-                  <p className="text-slate-600">
-                    {t.benefits.b2Desc}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4 group">
-                <div className="bg-primary text-white p-3 rounded-2xl group-hover:bg-secondary group-hover:text-primary transition-all">
-                  <Home className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-xl text-primary mb-1">
-                    {t.benefits.b3Title}
-                  </h4>
-                  <p className="text-slate-600">
-                    {t.benefits.b3Desc}
-                  </p>
-                </div>
-              </div>
+              <p className="text-slate-600 text-lg leading-relaxed">
+                {t.multimedia.desc1}
+              </p>
+              <p className="text-slate-600 text-lg leading-relaxed">
+                {t.multimedia.desc2}
+              </p>
             </div>
           </div>
           <div className="relative group">
@@ -608,43 +911,140 @@ export default function App() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-24 bg-white" id="faq">
-        <div className="max-w-4xl mx-auto px-8">
-          <h2 className="text-4xl font-black text-primary tracking-tight text-center mb-16">
-            {t.faq.title1} <span className="text-secondary">{t.faq.title2}</span>
-          </h2>
-          <div className="space-y-4">
+      
+      {/* Academic Pathway Section */}
+      <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-8 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+            <div className="max-w-3xl">
+              <h2 className="text-4xl md:text-5xl font-black text-primary mb-4 uppercase tracking-tight">{t.pathway.title}</h2>
+              <p className="text-slate-600 text-lg leading-relaxed">{t.pathway.desc}</p>
+            </div>
+            <div className="flex gap-4 mt-6 md:mt-0">
+              <span className="px-4 py-2 bg-indigo-100 text-indigo-900 text-xs font-bold rounded-full">IELTS EXEMPT</span>
+              <span className="px-4 py-2 bg-green-100 text-green-900 text-xs font-bold rounded-full">TOEFL EXEMPT</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-16">
             {[
-              {
-                q: t.faq.q1,
-                a: t.faq.a1,
-              },
-              {
-                q: t.faq.q2,
-                a: t.faq.a2,
-              },
-              {
-                q: t.faq.q3,
-                a: t.faq.a3,
-              },
-              {
-                q: t.faq.q4,
-                a: t.faq.a4,
-              },
+              { level: "01", title: t.pathway.l1, desc: t.pathway.l1Desc },
+              { level: "02", title: t.pathway.l2, desc: t.pathway.l2Desc },
+              { level: "03", title: t.pathway.l3, desc: t.pathway.l3Desc },
+              { level: "04", title: t.pathway.l4, desc: t.pathway.l4Desc },
+              { level: "05", title: t.pathway.l5, desc: t.pathway.l5Desc },
+              { level: "06", title: t.pathway.l6, desc: t.pathway.l6Desc },
+              { level: "07", title: t.pathway.l7, desc: t.pathway.l7Desc, highlight: true }
+            ].map((item, idx) => (
+              <div key={idx} className={`group flex flex-col items-center text-center px-4 py-8 rounded-[2rem] shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl cursor-pointer ${item.highlight ? 'bg-secondary text-primary shadow-secondary/30 scale-105 z-10' : 'bg-white text-primary shadow-slate-200/50'}`}>
+                <div className={`text-5xl font-black mb-6 transition-transform duration-300 group-hover:scale-110 ${item.highlight ? 'text-primary' : 'text-slate-100'}`}>
+                  {item.level}
+                </div>
+                <h4 className={`font-bold text-xs mb-4 uppercase tracking-wider ${item.highlight ? 'text-primary' : 'text-primary'}`}>{item.title}</h4>
+                <p className={`text-[11px] leading-relaxed ${item.highlight ? 'text-primary/90' : 'text-slate-400'}`}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Next Start Dates Container */}
+          <div className="bg-[#000040] rounded-[3rem] p-8 md:p-12 text-white flex flex-col lg:flex-row gap-12 shadow-2xl">
+            {/* Left Column */}
+            <div className="flex-1 space-y-8">
+              <div>
+                <h3 className="text-4xl md:text-5xl font-black text-white leading-none">{t.pathway.nextStart}</h3>
+                <h3 className="text-4xl md:text-5xl font-black text-[#FFD700] leading-none mt-2">{t.pathway.dates}</h3>
+              </div>
+
+              <div className="space-y-6">
+                <div>
+                  <div className="flex items-center gap-2 text-white/70 mb-4">
+                    <Plane className="w-4 h-4" />
+                    <span className="font-bold text-xs tracking-wider uppercase">{t.pathway.f1}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    {t.pathway.months.split(', ').map((month, idx) => (
+                      <div key={idx} className="px-6 py-2 rounded-full border border-white/20 bg-transparent text-sm font-medium transition-colors hover:bg-white/10 cursor-default">
+                        {month}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-2 text-white/70 mb-4">
+                    <Ticket className="w-4 h-4" />
+                    <span className="font-bold text-xs tracking-wider uppercase">{t.pathway.nonF1}</span>
+                  </div>
+                  <p className="text-xl font-bold mb-1">{t.pathway.monthly}</p>
+                  <p className="text-white/50 text-xs italic">{t.pathway.excluding}</p>
+                </div>
+              </div>
+
+              <button className="bg-[#FFD700] text-black font-black px-8 py-4 rounded-full text-sm tracking-wider hover:bg-yellow-400 transition-colors hover:scale-105 active:scale-95 duration-200">
+                {t.pathway.check}
+              </button>
+            </div>
+
+            {/* Right Column - Grid */}
+            <div className="flex-1 grid grid-cols-2 gap-4">
+              <div className="flex flex-col gap-4">
+                <div className="rounded-3xl overflow-hidden flex-grow h-full">
+                  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80" alt="Students studying" className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
+                </div>
+              </div>
+              <div className="flex flex-col gap-4">
+                <div className="bg-secondary rounded-3xl p-6 flex flex-col justify-center h-32 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  <Calendar className="w-6 h-6 text-primary mb-2" />
+                  <h4 className="text-primary font-black text-lg leading-tight">{t.pathway.applyEarly}</h4>
+                </div>
+                <div className="rounded-3xl overflow-hidden flex-grow">
+                  <img src="https://images.unsplash.com/photo-1506710507565-203b9f24669b?auto=format&fit=crop&q=80" alt="City skyline" className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      
+      {/* FAQ Section */}
+      <section id="faq" className="py-24 bg-surface">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black text-primary mb-6">
+              {t.faq.title1} <span className="text-secondary">{t.faq.title2}</span>
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {[
+              { q: t.faq.q1, a: t.faq.a1 },
+              { q: t.faq.q2, a: t.faq.a2 },
+              { q: t.faq.q3, a: t.faq.a3 },
+              { q: t.faq.q4, a: t.faq.a4 },
+              { q: t.faq.q5, a: t.faq.a5 },
+              { q: t.faq.q6, a: t.faq.a6 }
             ].map((faq, index) => (
               <div
                 key={index}
-                className="bg-surface rounded-2xl border border-slate-100 p-6 cursor-pointer transition-all hover:border-primary/20"
+                className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 cursor-pointer hover:shadow-md transition-all h-fit"
                 onClick={() => toggleFaq(index)}
               >
-                <div className="flex items-center justify-between">
-                  <h5 className="text-lg font-bold text-primary">{faq.q}</h5>
-                  <ChevronDown
-                    className={`w-6 h-6 text-primary transition-transform duration-300 ${
-                      openFaq === index ? 'rotate-180' : ''
+                <div className="flex justify-between items-center">
+                  <h3 className="font-bold text-slate-800 pr-4">{faq.q}</h3>
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                      openFaq === index
+                        ? 'bg-primary text-white'
+                        : 'bg-slate-100 text-slate-400'
                     }`}
-                  />
+                  >
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        openFaq === index ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
                 </div>
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
@@ -661,150 +1061,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Side Form / CTA Section */}
-      <section id="form-section" className="py-24 bg-primary relative overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-secondary rounded-full blur-[100px]"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-[100px]"></div>
-        </div>
-        <div className="max-w-7xl mx-auto px-8 relative z-10 grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-5xl font-black text-white leading-tight mb-6">
-              {t.form.title1} <br />
-              <span className="text-secondary underline underline-offset-8">
-                {t.form.title2}
-              </span>
-            </h2>
-            <p className="text-white/80 text-xl mb-12">
-              {t.form.desc}
-            </p>
-            <div className="bg-white/10 p-8 rounded-3xl border border-white/10">
-              <div className="flex items-center space-x-6 mb-8">
-                <div className="flex -space-x-3">
-                  <img
-                    className="w-12 h-12 rounded-full border-2 border-primary object-cover"
-                    alt="Admissions counselor"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBsbxvR8AGwyFQO0-Aa6VW0qxUcke91HpuDkB-aYaf9E_QBMj4W7_wi7-NPTxLfxey6IQA__sYgaW3gAsbza9qH6PZXDqDeQ0AZWiD7zzEbyEA9DYAR9SWFlLqdvjSJxjwS5IWBEjrofTbEh1Kqv0ZuhgcaW1ZeXPBHM0tQZEJvxr1AIasQ13G-V931TqggLpibZY5wYZ2LQ39EM7f6iA8XF8KKbZjx8syXYFbeAYEROWVCn2jch9Khx3GZEzdN2W89YYzSRLmf-s"
-                  />
-                  <img
-                    className="w-12 h-12 rounded-full border-2 border-primary object-cover"
-                    alt="Student support staff"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHTQIvrujfHihezw_0YiHFD3iOzEABWb2Om5UxuPMlU8B4B2O-K0JpFS1zx1m5GtFWRruxROToFmyhGXpPcYTA9a_xlvnFn7Z-ygZLzU5iZv-KO8U6EHkFnNJ9tuBWA4o32OJwNNME9DsllGeBiJMdlZerZup3KrAbw82bSi-zj8CvfJH8ZHN6WnzC-x-6_l-b61rLVDhHiW-tOS7vZEj5k3A67j43tgvt29u1fNgrkScZ9vZUJFAkuNEUx71IY0ny1iIEbDdIWI"
-                  />
-                  <img
-                    className="w-12 h-12 rounded-full border-2 border-primary object-cover"
-                    alt="International student advisor"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1qyhcMpMop-1k5dCgPnQ1PzypwiCk2RAkQ_Kshe5Pfy2XPNaQ3s5wSKcoai9GNhxjoCi5XTzcGj3ILiXF2NkpPPs4gxVTK1cE-XjxP5V7wj43HamWz9NptWCvtgfrCM94IkUd7MyHLjTFRHTFve9MBgoLizK_v0YZdB6NzPIbX50D9z6d3a4Xhqa5y7tVxZHhsA_eFgerVAZDTPYBvWvk2tDU5UWDHXwQfPObJn6WP0jxUISQ3UQPZ0A7UUk3jTYIhUxR1Pj7bBc"
-                  />
-                </div>
-                <p className="text-white font-bold">
-                  {t.form.assisted}
-                </p>
-              </div>
-              <button className="bg-secondary text-primary w-full py-5 rounded-2xl font-black text-xl hover:shadow-2xl hover:scale-[1.02] transition-all">
-                {t.form.btn}
-              </button>
-            </div>
-          </div>
-
-          {/* Form */}
-          <div className="bg-white p-10 rounded-[2.5rem] shadow-2xl">
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">
-                    {t.form.fName}
-                  </label>
-                  <input
-                    className="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary transition-all outline-none"
-                    placeholder="John Doe"
-                    type="text"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">
-                    {t.form.fEmail}
-                  </label>
-                  <input
-                    className="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary transition-all outline-none"
-                    placeholder="john@example.com"
-                    type="email"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">
-                    {t.form.fPhone}
-                  </label>
-                  <input
-                    className="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary transition-all outline-none"
-                    placeholder="+1..."
-                    type="tel"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">
-                    {t.form.fCountry}
-                  </label>
-                  <input
-                    className="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary transition-all outline-none"
-                    placeholder="Your Country"
-                    type="text"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">
-                    {t.form.fVisa}
-                  </label>
-                  <select className="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary transition-all outline-none text-slate-700">
-                    <option>{t.form.fVisaOpt1}</option>
-                    <option>{t.form.fVisaOpt2}</option>
-                    <option>{t.form.fVisaOpt3}</option>
-                    <option>{t.form.fVisaOpt4}</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">
-                    {t.form.fProg}
-                  </label>
-                  <select className="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary transition-all outline-none text-slate-700">
-                    <option>{t.form.fProgOpt1}</option>
-                    <option>{t.form.fProgOpt2}</option>
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">
-                  {t.form.fDate}
-                </label>
-                <input
-                  className="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary transition-all outline-none text-slate-700"
-                  type="month"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">
-                  {t.form.fQuestion}
-                </label>
-                <textarea
-                  className="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary transition-all outline-none resize-none"
-                  placeholder="How can we help?"
-                  rows={3}
-                ></textarea>
-              </div>
-              <button
-                className="w-full py-5 bg-primary text-white rounded-2xl font-black text-lg hover:opacity-90 transition-all"
-                type="submit"
-              >
-                {t.form.fSubmit}
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="w-full pt-16 pb-8 bg-slate-50">
