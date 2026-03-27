@@ -154,11 +154,11 @@ export function Hero() {
           </div>
 
           {/* Form Bubble */}
-          <div className="bg-white p-8 rounded-[2.5rem] shadow-2xl relative z-20 hidden lg:block" id="form-section">
-            <h3 className="text-3xl font-black text-primary mb-2 text-center">{t.form.title1} {t.form.title2}</h3>
+          <div className="bg-white p-6 lg:p-8 rounded-3xl lg:rounded-[2.5rem] shadow-2xl relative z-20" id="form-section">
+            <h3 className="text-2xl lg:text-3xl font-black text-primary mb-2 text-center">{t.form.title1} {t.form.title2}</h3>
             <p className="text-slate-500 text-sm mb-6 text-center">{t.form.desc}</p>
             <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="block text-sm font-bold text-primary mb-1">{t.form.fName}</label>
                   <input className="w-full bg-white border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-sm" placeholder={t.form.fNamePlaceholder} type="text" />
@@ -168,7 +168,7 @@ export function Hero() {
                   <input className="w-full bg-white border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-sm" placeholder={t.form.fEmailPlaceholder} type="email" />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="block text-sm font-bold text-primary mb-1">{t.form.fPhone}</label>
                   <div className="flex">
@@ -187,7 +187,7 @@ export function Hero() {
                   <input className="w-full bg-white border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-sm" placeholder={t.form.fCountryPlaceholder} type="text" />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="block text-sm font-bold text-primary mb-1">{t.form.fVisa}</label>
                   <select className="w-full bg-white border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-primary transition-all outline-none text-slate-700 text-sm">
