@@ -7,9 +7,12 @@ export function Programs() {
   return (
     <section className="py-24 bg-surface-container" id="programs">
       <div className="max-w-7xl mx-auto px-8">
-        <h2 className="text-4xl font-black text-primary tracking-tight text-center mb-16">
-          {t.programs.title}
-        </h2>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-black text-primary tracking-tight">
+            {t.programs.title}
+          </h2>
+          <div className="w-24 h-1.5 bg-secondary mx-auto mt-4 rounded-full"></div>
+        </div>
         <div className="grid md:grid-cols-2 gap-12">
           {/* Short-Term */}
           <div className="bento-card group bg-white p-10 rounded-3xl shadow-xl hover:shadow-2xl flex flex-col justify-between">

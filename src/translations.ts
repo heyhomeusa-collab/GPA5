@@ -38,8 +38,8 @@ export const translations = {
     campus: {
       title1: "Your New Home in",
       title2: "Florida",
-      expTitle: "The College Experience",
-      expDesc: "As a student, you get unrestricted access to a 100+ acre campus, including elite fitness centers, world-class libraries, game rooms, and the Career Development Center.",
+      expTitle: "Why GPA?",
+      expDesc: "As the exclusive enrollment partner for the English Language Institute (ELI) at Seminole State College of Florida, GPA offers a seamless, guided, and stress-free enrollment for international students.",
       vipTitle: "VIP Onboarding: From First Hello to First Class",
       vipDesc: "We handle everything: Application, I-20, Visa Prep, and Housing Support.",
       studentsSupported: "Students supported this year",
@@ -47,7 +47,15 @@ export const translations = {
       vipOnboarding: "VIP Onboarding",
       airportPickup: "Airport Pickup",
       support247: "24/7 Support",
-      bankOpening: "Bank Opening"
+      bankOpening: "Bank Opening",
+      b1Title: "VIP Onboarding: From First Hello to First Class.",
+      b1Desc: "We handle everything: Application, I-20, Visa Prep, and Arriving and Housing Support.",
+      b2Title: "Access to World-class Education and facilites.",
+      b2Desc: "Gym and Sport fields, 3 floor library, Planetarium, Student groups and so much more in a beautiful 100+ acre campus!",
+      b3Title: "Direct Path to Seminole State College and University of Central Florida (UCF)",
+      b3Desc: "Personal academic advising with free tutoring and career guidance with pathway to admission into degree programs at the college.",
+      b4Title: "With frequent field trips, College and ELI events.",
+      b4Desc: "Students learn not only the theory but have multiple ways to practice their knowledge in real life."
     },
     benefits: {
       title: "Unmatched Campus Benefits",
@@ -60,23 +68,23 @@ export const translations = {
       watch: "Watch: Living the Dream at SSC"
     },
     multimedia: {
-      title: "Experience the Real College life!",
+      title: "Real American College",
       desc1: "As a Seminole State College student, you get unrestricted access to every college facility, including fitness center, sport courts, world-class library, game rooms, and much more!",
-      desc2: "You will join a community of thousands in a real vibrant academic comunity in a 100+ acre campus."
+      desc2: "As a Seminole State College student, you are an integral part of a real, vibrant academic community of thousands of students and teachers in a gorgeous 100+ acre Florida campus, yours to be enjoyed!"
     },
     process: {
       title: "How It Works",
       subtitle: "We make the entire journey easy, from your first question to your first day of class.",
-      s1Title: "Submit Inquiry",
-      s1Desc: "Tell us about your goals and dreams.",
-      s2Title: "Free Consultation",
-      s2Desc: "We answer every question you have.",
-      s3Title: "Manage Application",
-      s3Desc: "We handle documents and deadlines.",
-      s4Title: "Visa Support",
-      s4Desc: "We guide you through the F-1 process.",
-      s5Title: "Arrive in Florida",
-      s5Desc: "We're here to help you settle in."
+      s1Title: "Free Consultation",
+      s1Desc: "Tell us about your goals and dreams. We answer every question you have.",
+      s2Title: "Application",
+      s2Desc: "Gather and submit your documentation and submit your information. We will handle the application process",
+      s3Title: "Visa Support",
+      s3Desc: "We will provide support and make sure you feel ready for your Visa request",
+      s4Title: "Arrival",
+      s4Desc: "We will help you find everything you need from your first day in USA. Airport transportation, Housing, Insurance and arrival to your first classes",
+      s5Title: "Student Support",
+      s5Desc: "Have a question? let us know! We are ready and happy to help!"
     },
     programs: {
       title: "Choose Your Program",
@@ -227,8 +235,8 @@ export const translations = {
     campus: {
       title1: "Tu Nuevo Hogar en",
       title2: "Florida",
-      expTitle: "La Experiencia Universitaria",
-      expDesc: "Como estudiante, tienes acceso sin restricciones a un campus de más de 100 acres, incluyendo centros de fitness de élite, bibliotecas de clase mundial, salas de juegos y el Centro de Desarrollo Profesional.",
+      expTitle: "¿Por qué GPA?",
+      expDesc: "Como socio exclusivo de inscripción del English Language Institute (ELI) en Seminole State College of Florida, GPA ofrece una inscripción perfecta, guiada y sin estrés para estudiantes internacionales.",
       vipTitle: "Onboarding VIP: Desde el Primer Hola hasta la Primera Clase",
       vipDesc: "Nos encargamos de todo: Aplicación, I-20, Preparación de Visa y Apoyo de Alojamiento.",
       studentsSupported: "Estudiantes apoyados este año",
@@ -236,7 +244,15 @@ export const translations = {
       vipOnboarding: "Onboarding VIP",
       airportPickup: "Recogida en el Aeropuerto",
       support247: "Soporte 24/7",
-      bankOpening: "Apertura de Cuenta Bancaria"
+      bankOpening: "Apertura de Cuenta Bancaria",
+      b1Title: "Onboarding VIP: Desde el Primer Hola hasta la Primera Clase.",
+      b1Desc: "Nos encargamos de todo: Aplicación, I-20, Preparación de Visa y Apoyo a la Llegada y Alojamiento.",
+      b2Title: "Acceso a Educación e instalaciones de clase mundial.",
+      b2Desc: "¡Gimnasio y campos deportivos, biblioteca de 3 pisos, Planetario, grupos de estudiantes y mucho más en un hermoso campus de más de 100 acres!",
+      b3Title: "Vía Directa a Seminole State College y University of Central Florida (UCF)",
+      b3Desc: "Asesoramiento académico personal con tutoría gratuita y orientación profesional con vía de admisión a programas de grado en la universidad.",
+      b4Title: "Con frecuentes excursiones, eventos del College y ELI.",
+      b4Desc: "Los estudiantes no solo aprenden la teoría, sino que tienen múltiples formas de poner en práctica sus conocimientos en la vida real."
     },
     benefits: {
       title: "Beneficios Inigualables del Campus",
@@ -249,23 +265,23 @@ export const translations = {
       watch: "Ver: Viviendo el Sueño en SSC"
     },
     multimedia: {
-      title: "¡Experimenta la verdadera vida universitaria!",
+      title: "Verdadera Universidad Americana",
       desc1: "Como estudiante de Seminole State College, tienes acceso sin restricciones a todas las instalaciones de la universidad, incluyendo centro de fitness, canchas deportivas, biblioteca de clase mundial, salas de juegos, ¡y mucho más!",
-      desc2: "Te unirás a una comunidad de miles en una vibrante comunidad académica real en un campus de más de 100 acres."
+      desc2: "Como estudiante de Seminole State College, eres una parte integral de una comunidad académica real y vibrante de miles de estudiantes y profesores en un hermoso campus de más de 100 acres en Florida, ¡tuyo para disfrutar!"
     },
     process: {
       title: "Cómo Funciona",
       subtitle: "Hacemos que todo el viaje sea fácil, desde tu primera pregunta hasta tu primer día de clases.",
-      s1Title: "Enviar Consulta",
-      s1Desc: "Cuéntanos sobre tus metas y sueños.",
-      s2Title: "Consulta Gratuita",
-      s2Desc: "Respondemos todas tus preguntas.",
-      s3Title: "Gestionar Aplicación",
-      s3Desc: "Manejamos documentos y fechas límite.",
-      s4Title: "Soporte de Visa",
-      s4Desc: "Te guiamos en el proceso F-1.",
-      s5Title: "Llegar a Florida",
-      s5Desc: "Estamos aquí para ayudarte a instalarte."
+      s1Title: "Consulta Gratuita",
+      s1Desc: "Cuéntanos sobre tus metas y sueños. Respondemos todas tus preguntas.",
+      s2Title: "Aplicación",
+      s2Desc: "Reúne y envía tu documentación e información. Nosotros manejaremos el proceso de aplicación.",
+      s3Title: "Soporte de Visa",
+      s3Desc: "Te brindaremos soporte y nos aseguraremos de que te sientas listo para tu solicitud de Visa.",
+      s4Title: "Llegada",
+      s4Desc: "Te ayudaremos a encontrar todo lo que necesitas desde tu primer día en USA. Transporte al aeropuerto, alojamiento, seguro y llegada a tus primeras clases.",
+      s5Title: "Apoyo Estudiantil",
+      s5Desc: "¿Tienes una pregunta? ¡Háznoslo saber! Estamos listos y felices de ayudarte."
     },
     programs: {
       title: "Elige Tu Programa",
@@ -416,8 +432,8 @@ export const translations = {
     campus: {
       title1: "Sua Nova Casa na",
       title2: "Flórida",
-      expTitle: "A Experiência Universitária",
-      expDesc: "Como aluno, você tem acesso irrestrito a um campus de mais de 100 acres, incluindo centros de fitness de elite, bibliotecas de classe mundial, salas de jogos e o Centro de Desenvolvimento de Carreira.",
+      expTitle: "Por que a GPA?",
+      expDesc: "Como parceiro exclusivo de matrículas do English Language Institute (ELI) no Seminole State College of Florida, a GPA oferece uma matrícula perfeita, guiada e sem estresse para estudantes internacionais.",
       vipTitle: "Onboarding VIP: Do Primeiro Olá à Primeira Aula",
       vipDesc: "Cuidamos de tudo: Inscrição, I-20, Preparação de Visto e Apoio de Moradia.",
       studentsSupported: "Alunos apoiados este ano",
@@ -425,7 +441,15 @@ export const translations = {
       vipOnboarding: "Onboarding VIP",
       airportPickup: "Recepção no Aeroporto",
       support247: "Suporte 24/7",
-      bankOpening: "Abertura de Conta Bancária"
+      bankOpening: "Abertura de Conta Bancária",
+      b1Title: "Onboarding VIP: Do Primeiro Olá à Primeira Aula.",
+      b1Desc: "Cuidamos de tudo: Inscrição, I-20, Preparação de Visto e Apoio na Chegada e Moradia.",
+      b2Title: "Acesso a Educação e instalações de classe mundial.",
+      b2Desc: "Academia e campos esportivos, biblioteca de 3 andares, Planetário, grupos de estudantes e muito mais em um belo campus de mais de 100 acres!",
+      b3Title: "Caminho Direto para Seminole State College e University of Central Florida (UCF)",
+      b3Desc: "Aconselhamento acadêmico pessoal com tutoria gratuita e orientação de carreira com caminho para admissão em programas de graduação na faculdade.",
+      b4Title: "Com viagens de campo frequentes, eventos da Faculdade e ELI.",
+      b4Desc: "Os alunos não apenas aprendem a teoria, mas têm várias maneiras de praticar seus conhecimentos na vida real."
     },
     benefits: {
       title: "Benefícios Inigualáveis do Campus",
@@ -438,23 +462,23 @@ export const translations = {
       watch: "Assistir: Vivendo o Sonho no SSC"
     },
     multimedia: {
-      title: "Experimente a verdadeira vida universitária!",
+      title: "Verdadeira Universidade Americana",
       desc1: "Como estudante do Seminole State College, você tem acesso irrestrito a todas as instalações da faculdade, incluindo academia, quadras esportivas, biblioteca de classe mundial, salas de jogos e muito mais!",
-      desc2: "Você se juntará a uma comunidade de milhares em uma comunidade acadêmica vibrante em um campus de mais de 100 acres."
+      desc2: "Como estudante do Seminole State College, você é parte integrante de uma comunidade acadêmica real e vibrante de milhares de estudantes e professores em um lindo campus de mais de 100 acres na Flórida, seu para desfrutar!"
     },
     process: {
       title: "Como Funciona",
       subtitle: "Tornamos toda a jornada fácil, desde a sua primeira pergunta até o seu primeiro dia de aula.",
-      s1Title: "Enviar Consulta",
-      s1Desc: "Conte-nos sobre seus objetivos e sonhos.",
-      s2Title: "Consulta Gratuita",
-      s2Desc: "Respondemos a todas as suas perguntas.",
-      s3Title: "Gerenciar Inscrição",
-      s3Desc: "Lidamos com documentos e prazos.",
-      s4Title: "Suporte de Visto",
-      s4Desc: "Orientamos você no processo F-1.",
-      s5Title: "Chegar na Flórida",
-      s5Desc: "Estamos aqui para ajudar você a se instalar."
+      s1Title: "Consulta Gratuita",
+      s1Desc: "Conte-nos sobre seus objetivos e sonhos. Respondemos a todas as suas perguntas.",
+      s2Title: "Inscrição",
+      s2Desc: "Reúna e envie sua documentação e informações. Cuidaremos de todo o processo de inscrição.",
+      s3Title: "Suporte de Visto",
+      s3Desc: "Forneceremos suporte e garantiremos que você se sinta pronto para sua solicitação de visto.",
+      s4Title: "Chegada",
+      s4Desc: "Ajudaremos você a encontrar tudo o que precisa desde o seu primeiro dia nos EUA. Transporte para o aeroporto, moradia, seguro e chegada às suas primeiras aulas.",
+      s5Title: "Apoio ao Estudante",
+      s5Desc: "Tem alguma dúvida? Deixe-nos saber! Estamos prontos e felizes em ajudar."
     },
     programs: {
       title: "Escolha Seu Programa",
@@ -605,8 +629,8 @@ export const translations = {
     campus: {
       title1: "Florida'daki",
       title2: "Yeni Eviniz",
-      expTitle: "Üniversite Deneyimi",
-      expDesc: "Bir öğrenci olarak, elit fitness merkezleri, dünya standartlarında kütüphaneler, oyun odaları ve Kariyer Geliştirme Merkezi dahil olmak üzere 100+ dönümlük bir kampüse sınırsız erişim elde edersiniz.",
+      expTitle: "Neden GPA?",
+      expDesc: "Florida'daki Seminole State College'daki İngilizce Dil Enstitüsü'nün (ELI) özel kayıt ortağı olarak GPA, uluslararası öğrenciler için sorunsuz, rehberli ve stressiz bir kayıt sunar.",
       vipTitle: "VIP Katılım: İlk Merhaba'dan İlk Derse",
       vipDesc: "Her şeyi biz hallediyoruz: Başvuru, I-20, Vize Hazırlığı ve Konaklama Desteği.",
       studentsSupported: "Bu yıl desteklenen öğrenciler",
@@ -614,7 +638,15 @@ export const translations = {
       vipOnboarding: "VIP Katılım",
       airportPickup: "Havaalanı Karşılama",
       support247: "7/24 Destek",
-      bankOpening: "Banka Hesabı Açma"
+      bankOpening: "Banka Hesabı Açma",
+      b1Title: "VIP Katılım: İlk Merhaba'dan İlk Derse.",
+      b1Desc: "Her şeyi biz hallediyoruz: Başvuru, I-20, Vize Hazırlığı ve Varış ile Konaklama Desteği.",
+      b2Title: "Dünya standartlarında Eğitime ve olanaklara erişim.",
+      b2Desc: "Spor salonu ve spor alanları, 3 katlı kütüphane, Planetaryum, öğrenci grupları ve 100+ dönümlük güzel bir kampüste çok daha fazlası!",
+      b3Title: "Seminole State College ve Orta Florida Üniversitesi'ne (UCF) Doğrudan Yol",
+      b3Desc: "Kolejdeki lisans programlarına kabul yolu ile ücretsiz özel ders ve kariyer rehberliği içeren kişisel akademik danışmanlık.",
+      b4Title: "Sık yapılan okul gezileri, Kolej ve ELI etkinlikleri ile.",
+      b4Desc: "Öğrenciler sadece teoriyi öğrenmekle kalmaz, aynı zamanda bilgilerini gerçek hayatta uygulama fırsatı bulurlar."
     },
     benefits: {
       title: "Eşsiz Kampüs Avantajları",
@@ -627,23 +659,23 @@ export const translations = {
       watch: "İzle: SSC'de Rüyayı Yaşamak"
     },
     multimedia: {
-      title: "Gerçek Üniversite hayatını deneyimleyin!",
+      title: "Gerçek Amerikan Üniversitesi",
       desc1: "Bir Seminole State College öğrencisi olarak, fitness merkezi, spor alanları, birinci sınıf kütüphane, oyun odaları ve çok daha fazlası dahil olmak üzere her üniversite tesisine sınırsız erişim elde edersiniz!",
-      desc2: "100+ dönümlük bir kampüste gerçek canlı bir akademik toplulukta binlerce kişiye katılacaksınız."
+      desc2: "Bir Seminole State College öğrencisi olarak, binlerce öğrenci ve öğretmenden oluşan gerçek ve canlı bir akademik topluluğun ayrılmaz bir parçasısınız. Florida'da 100+ dönümlük muhteşem bir kampüs, keyfini çıkarmanız için sizin!"
     },
     process: {
       title: "Nasıl Çalışır",
       subtitle: "İlk sorunuzdan ilk ders gününüze kadar tüm yolculuğu kolaylaştırıyoruz.",
-      s1Title: "Soru Gönder",
-      s1Desc: "Bize hedeflerinizden ve hayallerinizden bahsedin.",
-      s2Title: "Ücretsiz Danışmanlık",
-      s2Desc: "Aklınızdaki her soruyu cevaplıyoruz.",
-      s3Title: "Başvuruyu Yönet",
-      s3Desc: "Belgeleri ve son teslim tarihlerini hallediyoruz.",
-      s4Title: "Vize Desteği",
-      s4Desc: "F-1 sürecinde size rehberlik ediyoruz.",
-      s5Title: "Florida'ya Varış",
-      s5Desc: "Yerleşmenize yardımcı olmak için buradayız."
+      s1Title: "Ücretsiz Danışmanlık",
+      s1Desc: "Bize hedeflerinizden ve hayallerinizden bahsedin. Aklınızdaki her soruyu cevaplıyoruz.",
+      s2Title: "Başvuru",
+      s2Desc: "Belgelerinizi toplayarak bilgilerinizi gönderin. Başvuru sürecini biz yöneteceğiz.",
+      s3Title: "Vize Desteği",
+      s3Desc: "Size destek sağlayacağız ve Vize talebiniz için hazır hissettiğinizden emin olacağız.",
+      s4Title: "Varış",
+      s4Desc: "ABD'deki ilk gününüzden itibaren ihtiyacınız olan her şeyi bulmanıza yardımcı olacağız. Havaalanı transferi, Konaklama, Sigorta ve ilk derslerinize varış.",
+      s5Title: "Öğrenci Desteği",
+      s5Desc: "Sorunuz mu var? Bize bildirin! Yardım etmeye hazır ve istekliyiz."
     },
     programs: {
       title: "Programınızı Seçin",

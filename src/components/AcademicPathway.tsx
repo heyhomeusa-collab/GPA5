@@ -9,7 +9,8 @@ export function AcademicPathway() {
       <div className="max-w-7xl mx-auto px-8 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
           <div className="max-w-3xl">
-            <h2 className="text-4xl md:text-5xl font-black text-primary mb-4 uppercase tracking-tight">{t.pathway.title}</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-primary uppercase tracking-tight">{t.pathway.title}</h2>
+            <div className="w-24 h-1.5 bg-secondary mt-4 mb-6 rounded-full"></div>
             <p className="text-slate-600 text-lg leading-relaxed">{t.pathway.desc}</p>
           </div>
           <div className="flex gap-4 mt-6 md:mt-0">

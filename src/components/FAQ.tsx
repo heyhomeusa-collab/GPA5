@@ -14,9 +14,10 @@ export function FAQ() {
     <section id="faq" className="py-24 bg-surface">
       <div className="max-w-7xl mx-auto px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black text-primary mb-6">
+          <h2 className="text-3xl md:text-4xl font-black text-primary">
             {t.faq.title1} <span className="text-secondary">{t.faq.title2}</span>
           </h2>
+          <div className="w-24 h-1.5 bg-secondary mx-auto mt-4 rounded-full"></div>
         </div>
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {[

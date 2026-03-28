@@ -63,8 +63,8 @@ export function Reviews() {
         </p>
 
         {hoveredReview === keyId && (
-          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-[400px] bg-[#0f172a] text-white p-6 rounded-3xl shadow-2xl z-30 whitespace-normal">
-            <div className="flex items-center mb-4 pb-4 border-b border-slate-700">
+          <div className="absolute top-[110%] left-1/2 -translate-x-1/2 mt-2 w-[400px] bg-[#0f172a]/80 backdrop-blur-xl border border-slate-700/50 text-white p-6 rounded-3xl shadow-2xl z-[100] whitespace-normal">
+            <div className="flex items-center mb-4 pb-4 border-b border-slate-700/50">
               <img
                 className="w-12 h-12 rounded-full object-cover mr-3"
                 alt="Student"
@@ -75,8 +75,10 @@ export function Reviews() {
                 <span className="text-[10px] font-bold text-slate-400 tracking-wider">{content.role}</span>
               </div>
             </div>
-            <p className="text-sm text-slate-300 italic leading-relaxed">"{content.textLong}"</p>
-            <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#0f172a]"></div>
+            <p className="text-sm text-slate-300 italic leading-relaxed mb-4">"{content.textLong}"</p>
+            <p className="text-xs text-slate-400 leading-relaxed font-medium">
+              This experience highlights the transformative impact of our programs. Through dedicated support and world-class resources, GPA continues to empower individuals worldwide to achieve their academic and professional goals, paving the way for lasting success.
+            </p>
           </div>
         )}
       </div>
@@ -84,21 +86,21 @@ export function Reviews() {
   };
 
   return (
-    <section className="py-12 bg-surface overflow-hidden relative z-20 -mt-10 rounded-t-[3rem] group">
+    <section className="py-12 bg-surface relative z-20 -mt-10 rounded-t-[3rem] group">
       <div className="absolute -right-8 -top-8 text-primary/5 group-hover:text-primary/10 transition-colors pointer-events-none">
         <GraduationCap className="w-[200px] h-[200px]" />
       </div>
-      <div className="max-w-7xl mx-auto px-8 mb-8 flex items-center justify-between relative z-10">
-        <h2 className="text-4xl md:text-5xl font-black text-primary flex items-center">
-          <MessageCircle className="w-10 h-10 md:w-12 md:h-12 mr-4 text-secondary" />
+      <div className="max-w-7xl mx-auto px-8 mb-12 relative z-10 flex flex-col items-center text-center">
+        <h2 className="text-3xl md:text-4xl font-black text-primary flex items-center justify-center">
           {t.testimonials.meet}
         </h2>
+        <div className="w-24 h-1.5 bg-secondary mx-auto mt-4 rounded-full"></div>
       </div>
       
       {/* Marquee Container */}
-      <div className="relative flex flex-col gap-6 overflow-x-hidden group">
+      <div className="relative flex flex-col gap-6 w-full z-20">
         {/* Row 1 */}
-        <div className="relative flex overflow-x-hidden">
+        <div className={`relative flex ${hoveredReview?.includes('r1') ? 'z-50' : 'z-10'}`}>
           <div className="animate-marquee whitespace-nowrap flex items-center gap-6 py-4 group-hover:[animation-play-state:paused]">
             {[1, 2, 3, 1, 2, 3].map((item, idx) => renderReviewItem(item, idx, 1, false))}
           </div>
@@ -108,7 +110,7 @@ export function Reviews() {
         </div>
 
         {/* Row 2 */}
-        <div className="relative flex overflow-x-hidden">
+        <div className={`relative flex ${hoveredReview?.includes('r2') ? 'z-50' : 'z-10'}`}>
           <div className="animate-marquee-reverse whitespace-nowrap flex items-center gap-6 py-4 group-hover:[animation-play-state:paused]">
             {[3, 1, 2, 3, 1, 2].map((item, idx) => renderReviewItem(item, idx, 2, false))}
           </div>
