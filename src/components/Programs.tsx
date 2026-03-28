@@ -4,6 +4,10 @@ import { Calendar, CheckCircle2, School, GraduationCap } from 'lucide-react';
 export function Programs() {
   const { t } = useLanguage();
 
+  const scrollToForm = () => {
+    document.getElementById('apply-now')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="py-24 bg-surface-container" id="programs">
       <div className="max-w-7xl mx-auto px-8">
@@ -44,9 +48,15 @@ export function Programs() {
                   <CheckCircle2 className="w-5 h-5 text-secondary mr-3 fill-current" />{' '}
                   {t.programs.p1B3}
                 </li>
+                <li className="flex items-center text-slate-700 font-semibold">
+                  <CheckCircle2 className="w-5 h-5 text-secondary mr-3 fill-current" />{' '}
+                  {t.programs.p1B4}
+                </li>
               </ul>
             </div>
-            <button className="w-full py-4 bg-primary text-white rounded-2xl font-bold hover:scale-[1.02] transition-transform">
+            <button 
+              onClick={scrollToForm}
+              className="w-full py-4 bg-primary text-white rounded-2xl font-bold hover:scale-[1.02] transition-transform">
               {t.programs.p1Btn}
             </button>
           </div>
@@ -84,9 +94,15 @@ export function Programs() {
                   <CheckCircle2 className="w-5 h-5 text-secondary mr-3 fill-current" />{' '}
                   {t.programs.p2B3}
                 </li>
+                <li className="flex items-center text-white/90 font-semibold">
+                  <CheckCircle2 className="w-5 h-5 text-secondary mr-3 fill-current" />{' '}
+                  {t.programs.p2B4}
+                </li>
               </ul>
             </div>
-            <button className="w-full py-4 bg-secondary text-primary rounded-2xl font-bold hover:scale-[1.02] transition-transform relative z-10">
+            <button 
+              onClick={scrollToForm}
+              className="w-full py-4 bg-secondary text-primary rounded-2xl font-bold hover:scale-[1.02] transition-transform relative z-10">
               {t.programs.p2Btn}
             </button>
           </div>

@@ -5,7 +5,7 @@ export function Navigation() {
   const { currentLang, setCurrentLang, t } = useLanguage();
 
   const scrollToForm = () => {
-    document.getElementById('form-section')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('apply-now')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
