@@ -9,7 +9,8 @@ import {
   X,
   GraduationCap,
   FileBadge,
-  Play
+  Play,
+  Globe
 } from 'lucide-react';
 
 export function CampusPictures() {
@@ -20,11 +21,7 @@ export function CampusPictures() {
 
   const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ";
 
-  const carouselImages = [
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuA3Fg4RDlGgWfvya0TKjlfbdDagm4Jjk-QMarh3qZfaLbJCS1l3hUDBRnYZBmuV3v-cq5iK5_BRcT3hn_1ap8tqlgs7Pkp-xysCNg-ZP843j0f4lBfyMrVuUCj_6pd7ydLGelQOpoPvbpw2szOVroOpgYpFET9tEfGLrca7T5eRnbxJ-d8THkaGehBJad3Rc6URzgBMRKrrAaA6YRUzejHfA2IyUXFMFc1oZqpryXP-fa6sE7PWPoMebmBESDSVotFGim1jfjAqM_w",
-    "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1000",
-    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1000"
-  ];
+  const carouselImages = Array.from({ length: 10 }, (_, i) => `${process.env.VITE_BLOB_BASE_URL}/pics/${i + 1}.jpg`);
 
   const handlePrevious = (e?: React.MouseEvent) => {
     e?.stopPropagation();
@@ -72,24 +69,28 @@ export function CampusPictures() {
 
   return (
     <>
-      <section className="py-24 bg-surface-container overflow-hidden" id="campus">
+      <section className="pt-4 pb-24 bg-surface-container overflow-hidden" id="campus">
         <div className="max-w-7xl mx-auto px-8">
           
-          {/* Main Title: Why GPA? */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-black text-primary tracking-tight">
-              {t.campus.expTitle}
-            </h2>
-            <div className="w-24 h-1.5 bg-secondary mx-auto mt-4 rounded-full"></div>
-          </div>
-
-          {/* Intro Description Bubble */}
-          <div className="mb-8">
-            <div className="bg-white p-10 rounded-[2.5rem] border border-slate-100 relative overflow-hidden text-center shadow-sm">
-              <div className="absolute -left-8 -top-8 text-primary/5 pointer-events-none">
-                <Star fill="currentColor" className="w-[150px] h-[150px]" />
+          {/* Intro Description Bubble with Title Inside */}
+          <div className="mb-12">
+            <div className="bg-white/60 backdrop-blur-2xl rounded-[3.5rem] p-10 lg:p-14 border border-white relative overflow-hidden text-center shadow-xl group">
+              {/* Animation Background */}
+              <div className="absolute -inset-4 bg-primary/5 rounded-[4rem] -z-10 transition-transform opacity-0 group-hover:opacity-100 duration-500"></div>
+              
+              {/* Background Icons */}
+              <div className="absolute -left-8 -top-8 text-primary/5 pointer-events-none transition-transform group-hover:scale-110 duration-700">
+                <Globe className="w-[200px] h-[200px]" />
               </div>
-              <div className="relative z-10">
+              <div className="absolute -right-8 -bottom-8 text-primary/5 pointer-events-none transition-transform group-hover:scale-110 duration-700">
+                <FileBadge className="w-[200px] h-[200px]" />
+              </div>
+
+              <div className="relative z-10 flex flex-col items-center">
+                <h2 className="text-primary font-black text-4xl md:text-5xl mb-6">
+                  {t.campus.expTitle}
+                </h2>
+                <div className="w-24 h-1.5 bg-secondary mb-8 rounded-full"></div>
                 <p className="text-slate-600 text-2xl font-medium leading-relaxed max-w-4xl mx-auto">
                   {t.campus.expDesc}
                 </p>
@@ -180,91 +181,128 @@ export function CampusPictures() {
             </div>
           </div>
 
-          {/* Sub Title: Real American College */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black text-primary tracking-tight">
-              {t.multimedia.title}
-            </h2>
-            <div className="w-24 h-1.5 bg-secondary mx-auto mt-4 rounded-full"></div>
-          </div>
-
-          {/* Glassy Unified Media Bubble */}
-          <div className="bg-white/60 backdrop-blur-2xl rounded-[3.5rem] p-8 lg:p-12 border border-white shadow-xl relative group">
+          {/* Glassy Unified Media Bubble - Real American College */}
+          <div className="bg-white/60 backdrop-blur-2xl rounded-[3.5rem] p-10 lg:p-14 border border-white shadow-xl relative group overflow-hidden">
             <div className="absolute -inset-4 bg-primary/5 rounded-[4rem] -z-10 transition-transform opacity-0 group-hover:opacity-100 duration-500"></div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+            
+            {/* Inner Title */}
+            <div className="text-center mb-16 relative z-10">
+              <h2 className="text-4xl md:text-5xl font-black text-primary tracking-tight">
+                {t.multimedia.title}
+              </h2>
+              <div className="w-24 h-1.5 bg-secondary mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div className="flex flex-col gap-16 relative z-10">
               
-              {/* Photo Gallery Column */}
-              <div className="flex flex-col h-full min-h-[400px] lg:min-h-[500px]">
-                <div className="flex justify-end items-center mb-4 px-2">
-                  <div className="flex space-x-3">
-                    <button 
-                      onClick={handlePrevious}
-                      className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors text-slate-600 shadow-sm active:scale-95"
-                    >
-                      <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <button 
-                      onClick={handleNext}
-                      className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors text-slate-600 shadow-sm active:scale-95"
-                    >
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
+              {/* Tier 1: Intro Bubble + Static Photo Cluster */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div className="lg:col-span-5">
+                  <div className="bg-primary p-8 lg:p-10 rounded-[2.5rem] shadow-xl relative overflow-hidden group/box hover:-translate-y-1 transition-all duration-500">
+                    <div className="absolute -right-4 -bottom-4 text-white/5 pointer-events-none group-hover/box:scale-110 transition-transform">
+                      <Building className="w-32 h-32" />
+                    </div>
+                    <p className="text-white text-xl md:text-2xl font-medium leading-relaxed relative z-10">
+                      {t.multimedia.desc2}
+                    </p>
                   </div>
                 </div>
-                <div 
-                  className="flex-1 rounded-[2.5rem] overflow-hidden relative cursor-pointer shadow-inner border border-slate-100"
-                  onClick={() => setIsLightboxOpen(true)}
-                >
-                  <img
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                    alt="Campus view"
-                    src={carouselImages[currentImageIndex]}
-                  />
-                  <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-colors duration-300 flex items-center justify-center"></div>
+                
+                <div className="lg:col-span-7 relative h-[300px] md:h-[400px] flex items-center justify-center">
+                  <div className="relative w-full max-w-lg">
+                    {/* Polaroid 1 */}
+                    <div className="absolute top-0 left-0 w-48 h-48 md:w-56 md:h-56 bg-white p-2 md:p-3 shadow-2xl rounded-sm -rotate-6 hover:rotate-0 hover:z-20 transition-all duration-500 hover:scale-110 border border-slate-100">
+                      <img src={`${process.env.VITE_BLOB_BASE_URL}/pics/1.jpg`} className="w-full h-full object-cover" alt="Campus Life" />
+                    </div>
+                    {/* Polaroid 2 */}
+                    <div className="absolute top-10 right-0 w-48 h-48 md:w-56 md:h-56 bg-white p-2 md:p-3 shadow-2xl rounded-sm rotate-12 hover:rotate-0 hover:z-20 transition-all duration-500 translate-x-4 hover:scale-110 border border-slate-100">
+                      <img src={`${process.env.VITE_BLOB_BASE_URL}/pics/2.jpg`} className="w-full h-full object-cover" alt="Student Meeting" />
+                    </div>
+                    {/* Polaroid 3 */}
+                    <div className="absolute bottom-0 left-10 w-48 h-48 md:w-56 md:h-56 bg-white p-2 md:p-3 shadow-2xl rounded-sm 3 hover:rotate-0 hover:z-20 transition-all duration-500 -translate-x-8 translate-y-4 hover:scale-110 border border-slate-100">
+                      <img src={`${process.env.VITE_BLOB_BASE_URL}/pics/3.jpg`} className="w-full h-full object-cover" alt="Classroom" />
+                    </div>
+                    {/* Polaroid 4 */}
+                    <div className="absolute bottom-10 right-10 w-48 h-48 md:w-56 md:h-56 bg-white p-2 md:p-3 shadow-2xl rounded-sm -rotate-3 hover:rotate-0 hover:z-20 transition-all duration-500 translate-x-12 translate-y-8 hover:scale-110 border border-slate-100">
+                      <img src={`${process.env.VITE_BLOB_BASE_URL}/pics/4.jpg`} className="w-full h-full object-cover" alt="Campus View" />
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Video & Text Column */}
-              <div className="flex flex-col h-full justify-between">
-                <div className="space-y-6 mb-8 lg:mb-10">
-                  <p className="text-slate-600 text-2xl font-medium leading-relaxed">
-                    {t.multimedia.desc1}
-                  </p>
-                  <p className="text-slate-600 text-2xl font-medium leading-relaxed">
-                    {t.multimedia.desc2}
-                  </p>
-                </div>
-                
-                <div className="relative overflow-hidden rounded-[2.5rem] w-full aspect-video shadow-lg bg-slate-900 mx-auto border border-slate-100 mt-auto">
+              {/* Tier 2: Centered Full-Width Video */}
+              <div className="w-full max-w-5xl mx-auto">
+                <div className="relative overflow-hidden rounded-[3rem] w-full aspect-video shadow-2xl bg-slate-900 border-4 border-white group/video">
                   {isVideoPlaying ? (
-                    <iframe
-                      className="w-full h-full"
-                      src={`${videoUrl}?autoplay=1`}
-                      title="Campus Video"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
+                    <video className="w-full h-full object-cover" controls autoPlay playsInline loop preload="metadata">
+                      <source src={`${process.env.VITE_BLOB_BASE_URL}/vid/promo-video.mp4`} type="video/mp4" />
+                    </video>
                   ) : (
-                    <div className="relative w-full h-full group/video">
+                    <div className="relative w-full h-full">
                       <img
                         className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover/video:scale-105"
-                        alt="Group of diverse international students"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXdiz7OrzFtiR8cyqNGg3D8_sIHNBrTVLOV2BcSn-sHYEwRXLYpfRDVZAOmKMTF_Z2kT6M3XABhwCdd3l2ydSwM20yjWuWPi-iLOe5Cb-QhhPYI-XEZecI8g9dFnZXv_bWLi32w3qhch0pJHURzAukGFNGcQHxSn_FYJlssrAzgFRnq2SzcvgsJ8ZCw2aktPzUebvg_O1TTzBUJpV5ofmmyzfH7wopa_jLwMs66IRKCIaG_BZ3Kx7jVtmtz5hjSSjAiieT8VvMVRo"
+                        alt="Video Preview"
+                        src={`${process.env.VITE_BLOB_BASE_URL}/pics/6.jpg`}
                       />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <button 
                           onClick={() => setIsVideoPlaying(true)}
-                          className="bg-secondary text-primary w-20 h-20 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-xl"
+                          className="bg-secondary text-primary w-24 h-24 rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-2xl group/btn"
                         >
-                          <Play className="w-10 h-10 fill-current ml-1" />
+                          <Play className="w-12 h-12 fill-current ml-1 group-hover/btn:scale-110 transition-transform" />
                         </button>
                       </div>
-                      <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/10 backdrop-blur-md rounded-2xl text-white text-sm font-bold text-center border border-white/20">
-                        {t.benefits.watch}
+                      <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/60 to-transparent flex flex-col items-center">
+                        <div className="px-6 py-3 bg-white/10 backdrop-blur-md rounded-2xl text-white text-lg font-black border border-white/20">
+                          {t.benefits.watch}
+                        </div>
                       </div>
                     </div>
                   )}
+                </div>
+              </div>
+
+              {/* Tier 3: Carousel + Stacked Text Bubbles */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+                {/* Image Carousel (60%) */}
+                <div className="lg:col-span-7 flex flex-col h-full min-h-[400px]">
+                  <div className="flex justify-between items-center mb-6 px-4">
+                    <h3 className="text-primary font-black text-2xl uppercase tracking-tighter">Explore Campus</h3>
+                    <div className="flex space-x-3">
+                      <button onClick={handlePrevious} className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-all shadow-sm active:scale-95"><ChevronLeft className="w-6 h-6" /></button>
+                      <button onClick={handleNext} className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-all shadow-sm active:scale-95"><ChevronRight className="w-6 h-6" /></button>
+                    </div>
+                  </div>
+                  <div 
+                    className="flex-1 rounded-[3rem] overflow-hidden relative cursor-pointer shadow-xl border-4 border-white transition-transform hover:scale-[1.01] duration-500"
+                    onClick={() => setIsLightboxOpen(true)}
+                  >
+                    <img className="absolute inset-0 w-full h-full object-cover" alt="Campus view" src={carouselImages[currentImageIndex]} />
+                    <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-colors duration-300"></div>
+                  </div>
+                </div>
+
+                {/* Stacked Bubbles (40%) */}
+                <div className="lg:col-span-5 flex flex-col gap-8">
+                  {/* Bubble 1: Primary Dark */}
+                  <div className="bg-primary p-8 rounded-[2.5rem] shadow-xl flex-1 flex items-center">
+                    <p className="text-white text-lg md:text-xl font-medium leading-relaxed">
+                      {t.multimedia.desc1}
+                    </p>
+                  </div>
+                  
+                  {/* Bubble 2: White/Secondary Glass */}
+                  <div className="bg-white/80 p-8 rounded-[2.5rem] shadow-xl flex-1 border border-white">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-2xl bg-secondary/20 flex items-center justify-center text-primary">
+                        <Building className="w-6 h-6" />
+                      </div>
+                      <h4 className="text-primary font-black text-xl leading-tight">{t.campus.b2Title}</h4>
+                    </div>
+                    <p className="text-slate-600 text-lg font-medium leading-relaxed">
+                      {t.campus.b2Desc}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

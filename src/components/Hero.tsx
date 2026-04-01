@@ -25,7 +25,8 @@ export function Hero() {
           <img
             className="w-full h-full object-cover opacity-40"
             alt="Stunning Orlando skyline at sunset"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV-t6cGYc8pG-hT0pO3HG0ZZf4CSqHUdZoxaEWcG5a2vUwXXpLr27-pB3wR-ww1_rXEWO4IsZ7gLw0_3dkl_d8mF6QkwFjEDbRmSpVqFOncYJoZLFfkY-ozNvmg2UUocdMQKALy9OS_MmsT6wo17sep0y2vSpGnxnKCbuWcp4XlXt_8vYzq35nmZkZEAx2pyHvTG6N0usvA2rTADWXUZYlPrD5ySpVhA7qcBTgpEqkHWNkE7AKGuMQdVd2GY4z2Azjuvyf7CSmx84"
+            src={`${process.env.VITE_BLOB_BASE_URL}/pics/hero.jpg`}
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/20 to-background"></div>
         </div>
