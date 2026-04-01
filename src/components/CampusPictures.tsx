@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { BLOB_BASE_URL } from '../constants';
 import {
   Building,
   Star,
@@ -21,7 +22,7 @@ export function CampusPictures() {
 
   const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ";
 
-  const carouselImages = Array.from({ length: 10 }, (_, i) => `${import.meta.env.VITE_BLOB_BASE_URL}/pics/${i + 1}.jpg`);
+  const carouselImages = Array.from({ length: 10 }, (_, i) => `${BLOB_BASE_URL}/pics/${i + 1}.jpg`);
 
   const handlePrevious = (e?: React.MouseEvent) => {
     e?.stopPropagation();
@@ -212,19 +213,19 @@ export function CampusPictures() {
                   <div className="relative w-full max-w-lg">
                     {/* Polaroid 1 */}
                     <div className="absolute top-0 left-0 w-48 h-48 md:w-56 md:h-56 bg-white p-2 md:p-3 shadow-2xl rounded-sm -rotate-6 hover:rotate-0 hover:z-20 transition-all duration-500 hover:scale-110 border border-slate-100">
-                      <img src={`${import.meta.env.VITE_BLOB_BASE_URL}/pics/1.jpg`} className="w-full h-full object-cover" alt="Campus Life" />
+                      <img src={`${BLOB_BASE_URL}/pics/1.jpg`} className="w-full h-full object-cover" alt="Campus Life" />
                     </div>
                     {/* Polaroid 2 */}
                     <div className="absolute top-10 right-0 w-48 h-48 md:w-56 md:h-56 bg-white p-2 md:p-3 shadow-2xl rounded-sm rotate-12 hover:rotate-0 hover:z-20 transition-all duration-500 translate-x-4 hover:scale-110 border border-slate-100">
-                      <img src={`${import.meta.env.VITE_BLOB_BASE_URL}/pics/2.jpg`} className="w-full h-full object-cover" alt="Student Meeting" />
+                      <img src={`${BLOB_BASE_URL}/pics/2.jpg`} className="w-full h-full object-cover" alt="Student Meeting" />
                     </div>
                     {/* Polaroid 3 */}
                     <div className="absolute bottom-0 left-10 w-48 h-48 md:w-56 md:h-56 bg-white p-2 md:p-3 shadow-2xl rounded-sm 3 hover:rotate-0 hover:z-20 transition-all duration-500 -translate-x-8 translate-y-4 hover:scale-110 border border-slate-100">
-                      <img src={`${import.meta.env.VITE_BLOB_BASE_URL}/pics/3.jpg`} className="w-full h-full object-cover" alt="Classroom" />
+                      <img src={`${BLOB_BASE_URL}/pics/3.jpg`} className="w-full h-full object-cover" alt="Classroom" />
                     </div>
                     {/* Polaroid 4 */}
                     <div className="absolute bottom-10 right-10 w-48 h-48 md:w-56 md:h-56 bg-white p-2 md:p-3 shadow-2xl rounded-sm -rotate-3 hover:rotate-0 hover:z-20 transition-all duration-500 translate-x-12 translate-y-8 hover:scale-110 border border-slate-100">
-                      <img src={`${import.meta.env.VITE_BLOB_BASE_URL}/pics/4.jpg`} className="w-full h-full object-cover" alt="Campus View" />
+                      <img src={`${BLOB_BASE_URL}/pics/4.jpg`} className="w-full h-full object-cover" alt="Campus View" />
                     </div>
                   </div>
                 </div>
@@ -235,14 +236,14 @@ export function CampusPictures() {
                 <div className="relative overflow-hidden rounded-[3rem] w-full aspect-video shadow-2xl bg-slate-900 border-4 border-white group/video">
                   {isVideoPlaying ? (
                     <video className="w-full h-full object-cover" controls autoPlay playsInline loop preload="metadata">
-                      <source src={`${import.meta.env.VITE_BLOB_BASE_URL}/vid/promo-video.mp4`} type="video/mp4" />
+                      <source src={`${BLOB_BASE_URL}/vid/promo-video.mp4`} type="video/mp4" />
                     </video>
                   ) : (
                     <div className="relative w-full h-full">
                       <img
                         className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover/video:scale-105"
                         alt="Video Preview"
-                        src={`${import.meta.env.VITE_BLOB_BASE_URL}/pics/6.jpg`}
+                        src={`${BLOB_BASE_URL}/pics/6.jpg`}
                       />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <button 

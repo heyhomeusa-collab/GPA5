@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { BLOB_BASE_URL } from '../constants';
 import { MessageCircle, GraduationCap } from 'lucide-react';
 
 interface Review {
@@ -19,7 +20,7 @@ export function Reviews() {
   // Map translations to include images
   const reviewsData = (t.testimonials.reviews as any[] || []).map(r => ({
     ...r,
-    img: `${import.meta.env.VITE_BLOB_BASE_URL}/pics/${r.id}.jpg`
+    img: `${BLOB_BASE_URL}/pics/${r.id}.jpg`
   })) as Review[];
 
   const renderReviewItem = (review: Review, idx: number, row: number, duplicate: boolean = false) => {
