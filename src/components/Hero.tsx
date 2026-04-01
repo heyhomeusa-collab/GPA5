@@ -25,7 +25,7 @@ export function Hero() {
           <img
             className="w-full h-full object-cover opacity-40"
             alt="Stunning Orlando skyline at sunset"
-            src={`${process.env.VITE_BLOB_BASE_URL}/pics/hero.jpg`}
+            src={`${import.meta.env.VITE_BLOB_BASE_URL}/pics/hero.jpg`}
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/20 to-background"></div>

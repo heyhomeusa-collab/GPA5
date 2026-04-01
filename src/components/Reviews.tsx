@@ -19,7 +19,7 @@ export function Reviews() {
   // Map translations to include images
   const reviewsData = (t.testimonials.reviews as any[] || []).map(r => ({
     ...r,
-    img: `${process.env.VITE_BLOB_BASE_URL}/pics/${r.id}.jpg`
+    img: `${import.meta.env.VITE_BLOB_BASE_URL}/pics/${r.id}.jpg`
   })) as Review[];
 
   const renderReviewItem = (review: Review, idx: number, row: number, duplicate: boolean = false) => {
